@@ -2,7 +2,7 @@ import sys
 
 sys.path.append('..')
 
-import helper
+from helper import power
 
 def take_input():
 	print("Enter the secret key and then press enter: ")
@@ -14,7 +14,7 @@ def take_input():
 	return secret_key, prime_num, generator
 
 def get_public_key(secret_key, prime_num, generator):
-	public_key = helper.power(generator, secret_key, prime_num)
+	public_key = power(generator, secret_key, prime_num)
 	return public_key
 
 if __name__ == '__main__':

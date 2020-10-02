@@ -3,7 +3,7 @@ import sys
 
 sys.path.append('..')
 
-import helper
+from helper import power, convert_to_text, convert_to_num
 from generate_public_key import get_public_key
 
 def take_input():
@@ -25,7 +25,7 @@ def take_input():
 def decrypt_num(input_num, private_key, public_key, prime_num, generator):
 	"""Encrypts a number."""
 
-	super_key = helper.power(public_key, private_key, prime_num)
+	super_key = power(public_key, private_key, prime_num)
 	encrypted_num = (input_num - super_key + 2 * prime_num) % prime_num
 	return encrypted_num
 
@@ -36,9 +36,9 @@ if __name__ == '__main__':
 	own_public_key = get_public_key(private_key, prime_num, generator)
 	print("Public key used by this code is {}".format(own_public_key))
 
-	encrypted_nums = helper.convert_to_num(ciphertext)
+	encrypted_nums = convert_to_num(ciphertext)
 	nums = []
 	for num in encrypted_nums:
 		nums.append(decrypt_num(num, private_key, public_key, prime_num, generator))
-	decrypted_message = helper.convert_to_text(nums)
+	decrypted_message = convert_to_text(nums)
 	print("Decrypted message is {}".format(repr(decrypted_message)))

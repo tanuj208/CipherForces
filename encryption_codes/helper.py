@@ -1,5 +1,11 @@
 """Contains some helper functionsthat can
-be used across different encryptions."""
+be used across different encryptions.
+
+INSTRUCTIONS TO USE
+import sys
+sys.path.append('..') (If helper.py lies in ../ directory)
+from helper import power, .., 
+"""
 
 def power(x, y, mod):
 	"""Computes (x^y)%mod."""
