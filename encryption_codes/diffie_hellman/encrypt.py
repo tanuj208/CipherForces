@@ -1,7 +1,6 @@
+import ast
 import random
-import sys
-
-sys.path.append('..')
+import shlex
 
 from helper import power, convert_to_text, convert_to_num
 from generate_public_key import get_public_key
@@ -11,6 +10,10 @@ def take_input():
 
 	print("Enter the message to be encrypted and then press enter: ")
 	plaintext = input()
+	try:
+		plaintext = ast.literal_eval(shlex.quote(plaintext))
+	except:
+		pass
 	print("Enter the prime number to use and then press enter: ")
 	prime_num = int(input())
 	print("Enter the generator to use and then press enter: ")
