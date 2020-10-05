@@ -1,22 +1,3 @@
-"""Contains some helper functionsthat can
-be used across different encryptions.
-
-INSTRUCTIONS TO USE
-import sys
-sys.path.append('..') (If helper.py lies in ../ directory)
-from helper import power, .., 
-"""
-
-def power(x, y, mod):
-	"""Computes (x^y)%mod."""
-
-	if y == 0:
-		return 1
-	temp = power(x, y//2, mod)
-	if y%2 == 0:
-		return (temp*temp)%mod
-	else:
-		return (((x*temp)%mod)*temp)%mod
 
 #TODO: Better conversion methods
 def convert_to_num(text):
