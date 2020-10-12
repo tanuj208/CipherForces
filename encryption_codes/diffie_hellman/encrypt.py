@@ -3,7 +3,7 @@ import json
 import random
 import shlex
 
-from helper import convert_to_text, convert_to_num
+import helper
 
 def take_input():
 	"""Takes all necessary inputs for encryption."""
@@ -38,9 +38,12 @@ def encrypt_num(input_num):
 if __name__ == '__main__':
 
 	plaintext = take_input()
-	nums = convert_to_num(plaintext)
-	encrypted_nums = []
-	for num in nums:
-		encrypted_nums.append(encrypt_num(num))
-	encrypted_message = convert_to_text(encrypted_nums)
+	plaintext_binary = helper.convert_text_to_binary(plaintext)
+	plaintext_num = int(plaintext_binary, 2)
+	encrypted_num = encrypt_num(plaintext_num)
+	bit_len = encrypted_num.bit_length()
+	if bit_len % 8 != 0:
+		bit_len = (bit_len // 8 + 1) * 8
+	encrypted_binary = format(encrypted_num, '0{}b'.format(bit_len))
+	encrypted_message = helper.convert_binary_to_text(encrypted_binary)
 	print("Encrypted message is {}".format(repr(encrypted_message)))
