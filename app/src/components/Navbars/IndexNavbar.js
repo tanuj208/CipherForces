@@ -102,11 +102,11 @@ class ComponentsNavbar extends React.Component {
               tag={Link}
               id="navbar-brand"
             >
-              <span>BLK• </span>
-              Design System React
+              <span>CIPHER FORCES• </span>
+              Build Learn Test
             </NavbarBrand>
             <UncontrolledTooltip placement="bottom" target="navbar-brand">
-              Designed and Coded by Creative Tim
+              Designed and Coded by IIITH
             </UncontrolledTooltip>
             <button
               aria-expanded={this.state.collapseOpen}
@@ -147,16 +147,16 @@ class ComponentsNavbar extends React.Component {
               <NavItem className="p-0">
                 <NavLink
                   data-placement="bottom"
-                  href="https://twitter.com/CreativeTim"
+                  href="https://github.com/tanuj208/CipherForces"
                   rel="noopener noreferrer"
                   target="_blank"
-                  title="Follow us on Twitter"
+                  title="Fork us on Github"
                 >
-                  <i className="fab fa-twitter" />
-                  <p className="d-lg-none d-xl-none">Twitter</p>
+                  <i className="fab fa-github" />
+                  <p className="d-lg-none d-xl-none">Github</p>
                 </NavLink>
               </NavItem>
-              <NavItem className="p-0">
+              {/* <NavItem className="p-0">
                 <NavLink
                   data-placement="bottom"
                   href="https://www.facebook.com/CreativeTim"
@@ -179,7 +179,7 @@ class ComponentsNavbar extends React.Component {
                   <i className="fab fa-instagram" />
                   <p className="d-lg-none d-xl-none">Instagram</p>
                 </NavLink>
-              </NavItem>
+              </NavItem> */}
               <UncontrolledDropdown nav>
                 <DropdownToggle
                   caret
@@ -190,9 +190,13 @@ class ComponentsNavbar extends React.Component {
                   onClick={e => e.preventDefault()}
                 >
                   <i className="fa fa-cogs d-lg-none d-xl-none" />
-                  Getting started
+                  Browse
                 </DropdownToggle>
                 <DropdownMenu className="dropdown-with-icons">
+                  <DropdownItem tag={Link} to="/algorithms">
+                    <i className="tim-icons icon-bullet-list-67" />
+                    Algorithms
+                  </DropdownItem>
                   <DropdownItem href="https://demos.creative-tim.com/blk-design-system-react/#/documentation/tutorial">
                     <i className="tim-icons icon-paper" />
                     Documentation
@@ -211,7 +215,7 @@ class ComponentsNavbar extends React.Component {
                   </DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
-              <NavItem>
+              {/* <NavItem>
                <Button
                  className="nav-link d-none d-lg-block"
                  color="primary"
@@ -220,14 +224,14 @@ class ComponentsNavbar extends React.Component {
                >
                  <i className="tim-icons icon-spaceship" /> Upgrade to PRO
                </Button>
-             </NavItem>
+             </NavItem> */}
               <NavItem>
                 <Button
                   className="nav-link d-none d-lg-block"
                   color="default"
                   onClick={this.scrollToDownload}
                 >
-                  <i className="tim-icons icon-cloud-download-93" /> Download
+                  <i className="tim-icons icon-cloud-download-93" /> Register
                 </Button>
               </NavItem>
             </Nav>

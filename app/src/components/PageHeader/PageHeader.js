@@ -18,7 +18,7 @@
 import React from "react";
 
 // reactstrap components
-import { Container } from "reactstrap";
+import { Button, Container } from "reactstrap";
 
 class PageHeader extends React.Component {
   render() {
@@ -33,11 +33,17 @@ class PageHeader extends React.Component {
         <div className="squares square7" />
         <Container>
           <div className="content-center brand">
-            <h1 className="h1-seo">BLK• React</h1>
+            <h1 className="h1-seo">Breaking In!</h1>
             <h3 className="d-none d-sm-block">
-              A beautiful Design System for Bootstrap 4 (reactstrap) and React.
-              It's Free and Open Source.
+              A Crowsourced learning and testing Platform for Security Schemes
             </h3>
+            <Button
+                className="btn-simple btn-round"
+                color="primary"
+                type="button"
+              >
+                Get Started
+              </Button>
           </div>
         </Container>
       </div>
