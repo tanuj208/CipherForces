@@ -28,6 +28,7 @@ import Algorithms from "views/Algorithms.js";
 import LandingPage from "views/examples/LandingPage.js";
 import RegisterPage from "views/examples/RegisterPage.js";
 import ProfilePage from "views/examples/ProfilePage.js";
+import AddScheme from "views/AddScheme";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -44,6 +45,10 @@ ReactDOM.render(
       <Route
         path="/algorithms"
         render={props => <Algorithms {...props} />}
+      />
+      <Route
+        path="/add-scheme"
+        render={props => <AddScheme {...props} />}
       />
       <Route
         path="/profile-page"
