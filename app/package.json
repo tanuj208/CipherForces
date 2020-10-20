@@ -37,7 +37,7 @@
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.8",
     "moment": "2.24.0",
-    "node-sass": "4.13.1",
+    "node-sass": "^4.13.1",
     "nouislider": "14.2.0",
     "perfect-scrollbar": "1.5.0",
     "react": "16.13.1",
@@ -71,5 +71,6 @@
   "optionalDependencies": {
     "eslint-plugin-flowtype": "3.13.0",
     "typescript": "3.8.3"
-  }
+  },
+  "proxy": "http://localhost:5000"
 }

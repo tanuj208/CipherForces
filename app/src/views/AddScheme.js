@@ -46,7 +46,61 @@ import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footer/Footer.js";
 
 class AddScheme extends React.Component {
-  state = {};
+  state = {
+    data : {}
+  };
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.onChange = this.onChange.bind(this); 
+  }
+  handleSubmit() {
+    console.log(this.state.data);
+    var url = new URL("http://localhost:5000/add_data"),
+    params = this.state.data
+    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
+    fetch(url)
+    .then(response => {
+        console.log(response);
+    });
+  }
+  onChange(e) {
+    if(e.target.id === 'nameField') {
+      let newState = Object.assign({}, this.state.data);
+      newState['name'] = e.target.value;
+      this.setState({data : newState});
+    }
+    else if(e.target.id === 'typeField') {
+      let newState = Object.assign({}, this.state.data);
+      newState['type'] = e.target.value;
+      this.setState({data : newState});
+    }
+    else if(e.target.id === 'descriptionField') {
+      let newState = Object.assign({}, this.state.data);
+      newState['description'] = e.target.value;
+      this.setState({data : newState});
+    }
+    else if(e.target.id === 'challengeField') {
+      let newState = Object.assign({}, this.state.data);
+      newState['challenge'] = e.target.value;
+      this.setState({data : newState});
+    }
+    else if(e.target.id === 'hintField') {
+      let newState = Object.assign({}, this.state.data);
+      newState['hint'] = e.target.value;
+      this.setState({data : newState});
+    }
+    else if(e.target.id === 'plaintextField') {
+      let newState = Object.assign({}, this.state.data);
+      newState['plaintext'] = e.target.value;
+      this.setState({data : newState});
+    }
+    else if(e.target.id === 'ciphertextField') {
+      let newState = Object.assign({}, this.state.data);
+      newState['ciphertext'] = e.target.value;
+      this.setState({data : newState});
+    }
+  }
   componentDidMount() {
     document.body.classList.toggle("index-page");
   }
@@ -69,10 +123,11 @@ class AddScheme extends React.Component {
                   <h2 className="title">Add Scheme</h2>
                   <Card className="card-register">
                     <CardBody>
-                      <Form className="form">
+                      <Form className="form" onSubmit = {this.handleSubmit}>
                         <FormGroup>
                           <Label for="nameField">Name</Label>
                           <Input
+                            onChange={this.onChange}
                             type="text"
                             name="name"
                             id="nameField"
@@ -82,6 +137,7 @@ class AddScheme extends React.Component {
                         <FormGroup>
                           <Label for="typeField">Type</Label>
                           <Input
+                            onChange={this.onChange}
                             type="text"
                             name="type"
                             id="typeField"
@@ -92,6 +148,7 @@ class AddScheme extends React.Component {
                         <FormGroup>
                           <Label for="descriptionField">Description</Label>
                           <Input
+                            onChange={this.onChange}
                             type="textarea"
                             name="description"
                             id="descriptionField"
@@ -101,6 +158,7 @@ class AddScheme extends React.Component {
                         <FormGroup>
                           <Label for="challengeField">Challenge</Label>
                           <Input
+                            onChange={this.onChange}
                             type="textarea"
                             name="challenge"
                             id="challengeField"
@@ -110,6 +168,7 @@ class AddScheme extends React.Component {
                         <FormGroup>
                           <Label for="hintField">Hint</Label>
                           <Input
+                            onChange={this.onChange}
                             type="textarea"
                             name="hint"
                             id="hintField"
@@ -119,6 +178,7 @@ class AddScheme extends React.Component {
                         <FormGroup>
                           <Label for="plaintextField">Plaintext</Label>
                           <Input
+                            onChange={this.onChange}
                             type="text"
                             name="plaintext"
                             id="plaintextField"
@@ -128,6 +188,7 @@ class AddScheme extends React.Component {
                         <FormGroup>
                           <Label for="ciphertextField">Ciphertext</Label>
                           <Input
+                            onChange={this.onChange}
                             type="text"
                             name="ciphertext"
                             id="ciphertextField"

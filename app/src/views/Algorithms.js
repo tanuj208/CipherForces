@@ -48,11 +48,21 @@ import Footer from "components/Footer/Footer.js";
 class Algorithms extends React.Component {
   state = {
     squares1to6: "",
-    squares7and8: ""
+    squares7and8: "",
+    data : [] 
   };
   componentDidMount() {
+    console.log("done");
     document.body.classList.toggle("register-page");
     document.documentElement.addEventListener("mousemove", this.followCursor);
+    fetch('http://localhost:5000')
+    .then(res => res.json())
+    .then(result => {
+        this.setState({
+          data : JSON.parse(JSON.stringify(result))
+        }); 
+    });
+    console.log(this.state.data);
   }
   componentWillUnmount() {
     document.body.classList.toggle("register-page");
@@ -110,18 +120,21 @@ class Algorithms extends React.Component {
                                   <th>Name</th>
                                   <th>Type</th>
                                   <th className="text-center">Attempts</th>
-                                  <th className="text-right">Success</th>
-                                  <th className="text-right">Actions</th>
+                                  <th className="text-center">Success</th>
+                                  <th className="text-center">Actions</th>
                               </tr>
                           </thead>
                           <tbody>
-                              <tr>
-                                  <td className="text-center">1</td>
-                                  <td>RSA</td>
-                                  <td>Assymetric Key</td>
-                                  <td className="text-center">2234</td>
-                                  <td className="text-right">3</td>
-                                  <td className="text-right">
+                            {
+                                this.state.data.map( (row, index) => {
+                                  return(
+                                    <tr key = {index}>
+                                      <td className="text-center">{row.id}</td>
+                                      <td>{row.name}</td>
+                                      <td>{row.type}</td>
+                                      <td className="text-center">{row.attempts}</td>
+                                      <td className="text-center">{row.success}</td>
+                                      <td className="text-center">
                                       <Button className="btn-icon btn-simple" color="info" size="sm">
                                           <i className="fa fa-user"></i>
                                       </Button>{` `}
@@ -131,44 +144,11 @@ class Algorithms extends React.Component {
                                       <Button className="btn-icon btn-simple" color="danger" size="sm">
                                           <i className="fa fa-times" />
                                       </Button>{` `}
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td className="text-center">2</td>
-                                  <td>ElGamal</td>
-                                  <td>Assymetric Key</td>
-                                  <td className="text-center">1212</td>
-                                  <td className="text-right">1</td>
-                                  <td className="text-right">
-                                      <Button className="btn-icon btn-simple" color="info" size="sm">
-                                          <i className="fa fa-user"></i>
-                                      </Button>{` `}
-                                      <Button className="btn-icon btn-simple" color="success" size="sm">
-                                          <i className="fa fa-edit"></i>
-                                      </Button>{` `}
-                                      <Button className="btn-icon btn-simple" color="danger" size="sm">
-                                          <i className="fa fa-times" />
-                                      </Button>{` `}
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td className="text-center">3</td>
-                                  <td>DES</td>
-                                  <td>Block Cipher</td>
-                                  <td className="text-center">12</td>
-                                  <td className="text-right">0</td>
-                                  <td className="text-right">
-                                      <Button className="btn-icon btn-simple" color="info" size="sm">
-                                          <i className="fa fa-user"></i>
-                                      </Button>{` `}
-                                      <Button className="btn-icon btn-simple" color="success" size="sm">
-                                          <i className="fa fa-edit"></i>
-                                      </Button>{` `}
-                                      <Button className="btn-icon btn-simple" color="danger" size="sm">
-                                          <i className="fa fa-times" />
-                                      </Button>{` `}
-                                  </td>
-                              </tr>
+                                      </td>
+                                    </tr>
+                                  )
+                                })
+                            }
                           </tbody>
                       </Table>
                       </CardBody>
