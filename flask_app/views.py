@@ -1,12 +1,16 @@
 from flask import Blueprint, jsonify, request
 from . import db 
 from .models import Algorithm
+from werkzeug.utils import secure_filename
 
 main = Blueprint('main', __name__)
 
 @main.route('/add_algorithm', methods=['POST'])
 def add_algorithm():
-    algo_data = request.get_json()
+    algo_data = request.form
+    selectedFile = request.files['selectedFile']
+    filename = "XXXX.txt"
+    selectedFile.save(filename)
 
     new_algo = \
         Algorithm(
@@ -14,7 +18,7 @@ def add_algorithm():
             type = algo_data['type'],
             description = algo_data['description'],
             challenge = algo_data['challenge'],
-            hint = algo_data['hint'],
+            hint = algo_data['hint'] if 'hint' in algo_data else '',
             plaintext = algo_data['plaintext'],
             ciphertext = algo_data['ciphertext'],
             attempts = 0,

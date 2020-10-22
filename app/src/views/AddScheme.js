@@ -55,13 +55,25 @@ class AddScheme extends React.Component {
     this.onChange = this.onChange.bind(this); 
   }
   handleSubmit() {
-    console.log(this.state.data);
-    var url = new URL("http://localhost:5000/add_data"),
-    params = this.state.data
-    Object.keys(params).forEach(key => url.searchParams.append(key, params[key]))
-    fetch(url)
+    var url = new URL("http://localhost:5000/add_algorithm");
+    const data = new FormData();
+    Object.keys(this.state.data).forEach(key => data.append(key, this.state.data[key]))
+    const requestOptions = {
+      method: 'POST',
+      // headers: {'Content-Type': 'application/json'},
+      body: data,
+    };
+    // for(var key of requestOptions['body'].entries())
+    // {
+    //   console.log(key[0], "F", key[1]);
+    // }
+    console.log(requestOptions);
+    fetch(url, requestOptions)
     .then(response => {
         console.log(response);
+        // for(var key in response){
+        //   console.log(key, response[key])
+        // }
     });
   }
   onChange(e) {
@@ -100,6 +112,12 @@ class AddScheme extends React.Component {
       newState['ciphertext'] = e.target.value;
       this.setState({data : newState});
     }
+    else {
+      let newState = Object.assign({}, this.state.data);
+      newState['selectedFile'] = e.target.files[0];
+      console.log(newState['selectedFile'])
+      this.setState({data : newState});
+    }
   }
   componentDidMount() {
     document.body.classList.toggle("index-page");
@@ -132,6 +150,7 @@ class AddScheme extends React.Component {
                             name="name"
                             id="nameField"
                             placeholder="Name your Algorithm"
+                            required
                           />
                         </FormGroup>
                         <FormGroup>
@@ -142,6 +161,7 @@ class AddScheme extends React.Component {
                             name="type"
                             id="typeField"
                             placeholder="Specify Algorithm Type"
+                            required
                           />
                         </FormGroup>
 
@@ -152,6 +172,7 @@ class AddScheme extends React.Component {
                             type="textarea"
                             name="description"
                             id="descriptionField"
+                            required
                           />
                         </FormGroup>
 
@@ -162,6 +183,7 @@ class AddScheme extends React.Component {
                             type="textarea"
                             name="challenge"
                             id="challengeField"
+                            required
                           />
                         </FormGroup>
 
@@ -183,6 +205,7 @@ class AddScheme extends React.Component {
                             name="plaintext"
                             id="plaintextField"
                             placeholder="Enter Plaintext to be found"
+                            required
                           />
                         </FormGroup>
                         <FormGroup>
@@ -193,6 +216,7 @@ class AddScheme extends React.Component {
                             name="ciphertext"
                             id="ciphertextField"
                             placeholder="Enter Ciphertext for challenge"
+                            required
                           />
                         </FormGroup>
 
@@ -210,6 +234,7 @@ class AddScheme extends React.Component {
                             type="file"
                             name="file"
                             id="fileField"
+                            onChange={this.onChange}
                           />
                         </FormGroup>
 
