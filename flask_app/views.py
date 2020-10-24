@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from . import db 
 from .models import Algorithm
 from werkzeug.utils import secure_filename
+import json
 
 main = Blueprint('main', __name__)
 
@@ -31,20 +32,13 @@ def add_algorithm():
 
 @main.route('/algorithms')
 def algorithms():
-    algo_list = Algorithm.query.all()
-    algorithms = []
-    for algo in algo_list:
-        algorithms.append(
-            {
-                'name': algo.name,
-                'type': algo.type,
-                'description': algo.description,
-                'challenge' : algo.challenge,
-                'hint' : algo.hint,
-                'plaintext' : algo.plaintext,
-                'ciphertext' : algo.ciphertext,
-                'attempts' : algo.attempts,
-                'success' : algo.success,
-            }
-        )
-    return jsonify({'algorithms': algorithms})
+    data = Algorithm.query.all()
+    all_rows = [{'id' : row.id, 'name' : row.name, 'type' : row.type, 'description' : row.description, 'challenge' : row.challenge, 'hint' : row.hint, 'plaintext' : row.plaintext, 'ciphertext' : row.ciphertext, 'attempts' : row.attempts, 'success' : row.success} for row in data]
+    return json.dumps(all_rows)
+
+@main.route('/get_algo')
+def get_algo():
+    data = Algorithm.query.get(request.args.get('id'))
+    data = {'id' : data.id, 'name' : data.name, 'type' : data.type, 'description' : data.description, 'challenge' : data.challenge, 'hint' : data.hint, 'plaintext' : data.plaintext, 'ciphertext' : data.ciphertext, 'attempts' : data.attempts, 'success' : data.success}
+    print(data)
+    return json.dumps(data)

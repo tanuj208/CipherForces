@@ -22,16 +22,16 @@ class Algorithm(db.Model):
     success = db.Column(db.Integer)	
 
     def __init__(self, id, name, type, description, challenge, hint, plaintext, ciphertext, attempts, success):
-    	self.id = id
-    	self.name = name
-    	self.type = type
-    	self.description = description
-    	self.challenge = challenge
-    	self.hint = hint
-    	self.plaintext = plaintext
-    	self.ciphertext = ciphertext
-    	self.attempts = attempts
-    	self.success = success
+        self.id = id
+        self.name = name
+        self.type = type
+        self.description = description
+        self.challenge = challenge
+        self.hint = hint
+        self.plaintext = plaintext
+        self.ciphertext = ciphertext
+        self.attempts = attempts
+        self.success = success
 
 
 def create_app():
@@ -51,16 +51,6 @@ CORS(app)
 
 @app.route('/')
 def Get_Data():
-	data = Algorithm.query.all()
-	all_rows = [{'id' : row.id, 'name' : row.name, 'type' : row.type, 'description' : row.description, 'challenge' : row.challenge, 'hint' : row.hint, 'plaintext' : row.plaintext, 'ciphertext' : row.ciphertext, 'attempts' : row.attempts, 'success' : row.success} for row in data]
-	return (json.dumps(all_rows))
-
-@app.route('/add_data', methods = ['GET', 'POST'])
-def Add_Data():
-	print(request)
-	print(request.values)
-	print(request.args)
-	new_row = Algorithm(len(Algorithm.query.all()) + 1, request.args.get("name"), request.args.get("type"), request.args.get("description"), request.args.get("challenge"), request.args.get("hint"), request.args.get("plaintext"), request.args.get("ciphertext"), 0, 0)
-	db.session.add(new_row)
-	db.session.commit()
-	return "ok"
+    data = Algorithm.query.all()
+    all_rows = [{'id' : row.id, 'name' : row.name, 'type' : row.type, 'description' : row.description, 'challenge' : row.challenge, 'hint' : row.hint, 'plaintext' : row.plaintext, 'ciphertext' : row.ciphertext, 'attempts' : row.attempts, 'success' : row.success} for row in data]
+    return (json.dumps(all_rows))

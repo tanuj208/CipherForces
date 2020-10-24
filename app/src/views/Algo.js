@@ -45,22 +45,22 @@ import {
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footer/Footer.js";
 
-class Algorithms extends React.Component {
+class Algo extends React.Component {
   state = {
     squares1to6: "",
     squares7and8: "",
     data : [] 
   };
   componentDidMount() {
-    console.log("done");
-    document.body.classList.toggle("register-page");
-    document.documentElement.addEventListener("mousemove", this.followCursor);
-    fetch('http://localhost:5000/algorithms')
+    var url = new URL('http://localhost:5000/get_algo')
+    var id_val = this.props.match.params.id
+    url.searchParams.append('id', id_val)
+    fetch(url)
     .then(res => res.json())
     .then(result => {
         this.setState({
           data : JSON.parse(JSON.stringify(result))
-        }); 
+        });
     });
     console.log(this.state.data);
   }
@@ -110,7 +110,7 @@ class Algorithms extends React.Component {
                       id="square8"
                       style={{ transform: this.state.squares7and8 }}
                     />
-                      <h2 className="title">Test Schemes</h2>
+                      <h2 className="title">Solve challenge</h2>
                     <Card className="card-register">
                       <CardBody>
                         <Table responsive>
@@ -121,42 +121,32 @@ class Algorithms extends React.Component {
                                   <th>Type</th>
                                   <th className="text-center">Attempts</th>
                                   <th className="text-center">Success</th>
-                                  <th className="text-center">Actions</th>
+                                  <th className="text-center">Description</th>
+                                  <th className="text-center">Challenge</th>
+                                  <th className="text-center">Hint</th>
+                                  <th className="text-center">Plaintext</th>
+                                  <th className="text-center">Ciphertext</th>
                               </tr>
                           </thead>
                           <tbody>
                             {
-                                this.state.data.map( (row, index) => {
-                                  return(
-                                    <tr key = {index}>
-                                      <td className="text-center">{row.id}</td>
-                                      <td>{row.name}</td>
-                                      <td>{row.type}</td>
-                                      <td className="text-center">{row.attempts}</td>
-                                      <td className="text-center">{row.success}</td>
-                                      <td className="text-center">
-                                      <Button className="btn-icon btn-simple" color="info" size="sm" tag={Link} to={`/algo/${row.id}`}>
-                                          <i className="fa fa-user"></i>
-                                      </Button>{` `}
-                                      <Button className="btn-icon btn-simple" color="success" size="sm">
-                                          <i className="fa fa-edit"></i>
-                                      </Button>{` `}
-                                      <Button className="btn-icon btn-simple" color="danger" size="sm">
-                                          <i className="fa fa-times" />
-                                      </Button>{` `}
-                                      </td>
-                                    </tr>
-                                  )
-                                })
+                                <tr key = {this.state.data.id}>
+                                  <td className="text-center">{this.state.data.id}{this.props.match.params.id}</td>
+                                  <td>{this.state.data.name}</td>
+                                  <td>{this.state.data.type}</td>
+                                  <td className="text-center">{this.state.data.attempts}</td>
+                                  <td className="text-center">{this.state.data.success}</td>
+                                  <td className="text-center">{this.state.data.description}</td>
+                                  <td className="text-center">{this.state.data.challenge}</td>
+                                  <td className="text-center">{this.state.data.hint}</td>
+                                  <td className="text-center">{this.state.data.plaintext}</td>
+                                  <td className="text-center">{this.state.data.ciphertext}</td>
+
+                                </tr>
                             }
                           </tbody>
                       </Table>
                       </CardBody>
-                      <CardFooter>
-                        <Button className="btn-round" color="primary" size="lg" tag={Link} to="/add-scheme">
-                          Add Algorithm
-                        </Button>
-                      </CardFooter>
                     </Card>
                   </Col>
                 </Row>
@@ -201,4 +191,4 @@ class Algorithms extends React.Component {
   }
 }
 
-export default Algorithms;
+export default Algo;

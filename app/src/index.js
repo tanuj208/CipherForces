@@ -24,6 +24,7 @@ import "assets/scss/blk-design-system-react.scss?v=1.1.0";
 import "assets/demo/demo.css";
 
 import Index from "views/Index.js";
+import Algo from "views/Algo.js";
 import Algorithms from "views/Algorithms.js";
 import LandingPage from "views/examples/LandingPage.js";
 import RegisterPage from "views/examples/RegisterPage.js";
@@ -49,6 +50,10 @@ ReactDOM.render(
       <Route
         path="/add-scheme"
         render={props => <AddScheme {...props} />}
+      />
+      <Route
+        path="/algo/:id"
+        render={props => <Algo {...props} />}
       />
       <Route
         path="/profile-page"
