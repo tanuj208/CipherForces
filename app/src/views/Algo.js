@@ -147,6 +147,11 @@ class Algo extends React.Component {
                           </tbody>
                       </Table>
                       </CardBody>
+                      <CardFooter>
+                        <Button className="btn-round" color="primary" size="lg" tag={Link} to="/add-scheme">
+                          Solve challenge
+                        </Button>
+                      </CardFooter>
                     </Card>
                   </Col>
                 </Row>

@@ -155,7 +155,8 @@ class Algorithms extends React.Component {
                       <CardFooter>
                         <Button className="btn-round" color="primary" size="lg" tag={Link} to="/add-scheme">
                           Add Algorithm
-                        </Button>
+                          </Button>
+                        
                       </CardFooter>
                     </Card>
                   </Col>
