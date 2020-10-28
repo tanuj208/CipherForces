@@ -42,3 +42,10 @@ def get_algo():
     data = {'id' : data.id, 'name' : data.name, 'type' : data.type, 'description' : data.description, 'challenge' : data.challenge, 'hint' : data.hint, 'plaintext' : data.plaintext, 'ciphertext' : data.ciphertext, 'attempts' : data.attempts, 'success' : data.success}
     print(data)
     return json.dumps(data)
+
+@main.route('/solve-challenge')
+def solve_challenge():
+	data = Algorithm.query.get(request.args.get('id'))
+	data = {'id' : data.id, 'name' : data.name, 'type' : data.type, 'description' : data.description, 'challenge' : data.challenge, 'hint' : data.hint, 'plaintext' : data.plaintext, 'ciphertext' : data.ciphertext, 'attempts' : data.attempts, 'success' : data.success}
+    # return json.dumps(data)
+	return "Hello ji challenge solve karlo" + str(request.args.get('id'))

@@ -30,6 +30,7 @@ import LandingPage from "views/examples/LandingPage.js";
 import RegisterPage from "views/examples/RegisterPage.js";
 import ProfilePage from "views/examples/ProfilePage.js";
 import AddScheme from "views/AddScheme";
+import SolveChallenge from "views/SolveChallenge";
 
 ReactDOM.render(
   <BrowserRouter>
@@ -54,6 +55,10 @@ ReactDOM.render(
       <Route
         path="/algo/:id"
         render={props => <Algo {...props} />}
+      />
+      <Route
+        path="/solve-challenge/:id"
+        render={props => <SolveChallenge {...props} />}
       />
       <Route
         path="/profile-page"

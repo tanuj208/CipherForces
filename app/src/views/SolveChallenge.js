@@ -38,7 +38,7 @@ import {
   Container,
   Row,
   Col,
-  Table
+  FormText,
 } from "reactstrap";
 
 // core components
@@ -47,148 +47,114 @@ import Footer from "components/Footer/Footer.js";
 
 class SolveChallenge extends React.Component {
   state = {
-    squares1to6: "",
-    squares7and8: "",
-    data : [] 
+    data : {}
   };
-  componentDidMount() {
-    var url = new URL('http://localhost:5000/get_algo')
-    var id_val = this.props.match.params.id
-    url.searchParams.append('id', id_val)
-    fetch(url)
-    .then(res => res.json())
-    .then(result => {
-        this.setState({
-          data : JSON.parse(JSON.stringify(result))
-        });
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.onChange = this.onChange.bind(this); 
+  }
+  handleSubmit() {
+    var url = new URL("http://localhost:5000/solve-challenge");
+    const data = new FormData();
+    Object.keys(this.state.data).forEach(key => data.append(key, this.state.data[key]))
+    const requestOptions = {
+      method: 'POST',
+      // headers: {'Content-Type': 'application/json'},
+      body: data,
+    };
+    // for(var key of requestOptions['body'].entries())
+    // {
+    //   console.log(key[0], "F", key[1]);
+    // }
+    console.log(requestOptions);
+    fetch(url, requestOptions)
+    .then(response => {
+        console.log(response);
+        // for(var key in response){
+        //   console.log(key, response[key])
+        // }
     });
-    console.log(this.state.data);
+  }
+  onChange(e) {
+    
+    if(e.target.id === 'plaintextField') {
+      let newState = Object.assign({}, this.state.data);
+      newState['plaintext'] = e.target.value;
+      this.setState({data : newState});
+    }
+    else if(e.target.id === 'ciphertextField') {
+      let newState = Object.assign({}, this.state.data);
+      newState['ciphertext'] = e.target.value;
+      this.setState({data : newState});
+    }
+  }
+  componentDidMount() {
+    document.body.classList.toggle("index-page");
   }
   componentWillUnmount() {
-    document.body.classList.toggle("register-page");
-    document.documentElement.removeEventListener(
-      "mousemove",
-      this.followCursor
-    );
+    document.body.classList.toggle("index-page");
   }
-  followCursor = event => {
-    let posX = event.clientX - window.innerWidth / 2;
-    let posY = event.clientY - window.innerWidth / 6;
-    this.setState({
-      squares1to6:
-        "perspective(500px) rotateY(" +
-        posX * 0.05 +
-        "deg) rotateX(" +
-        posY * -0.05 +
-        "deg)",
-      squares7and8:
-        "perspective(500px) rotateY(" +
-        posX * 0.02 +
-        "deg) rotateX(" +
-        posY * -0.02 +
-        "deg)"
-    });
-  };
   render() {
     return (
       <>
         <IndexNavbar />
         <div className="wrapper">
-          <div className="page-header">
-            <div className="page-header-image" />
-            <div className="content">
-              <Container>
-                <Row>
-                  <Col className="offset-lg-0 offset-md-0" lg="12" md="12">
-                    <div
-                      className="square square-7"
-                      id="square7"
-                      style={{ transform: this.state.squares7and8 }}
-                    />
-                    <div
-                      className="square square-8"
-                      id="square8"
-                      style={{ transform: this.state.squares7and8 }}
-                    />
-                      <h2 className="title">Solve challenge</h2>
-                    <Card className="card-register">
-                      <CardBody>
-                        <Table responsive>
-                          <thead>
-                              <tr>
-                                  <th className="text-center">#</th>
-                                  <th>Name</th>
-                                  <th>Type</th>
-                                  <th className="text-center">Attempts</th>
-                                  <th className="text-center">Success</th>
-                                  <th className="text-center">Description</th>
-                                  <th className="text-center">Challenge</th>
-                                  <th className="text-center">Hint</th>
-                                  <th className="text-center">Plaintext</th>
-                                  <th className="text-center">Ciphertext</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                            {
-                                <tr key = {this.state.data.id}>
-                                  <td className="text-center">{this.state.data.id}{this.props.match.params.id}</td>
-                                  <td>{this.state.data.name}</td>
-                                  <td>{this.state.data.type}</td>
-                                  <td className="text-center">{this.state.data.attempts}</td>
-                                  <td className="text-center">{this.state.data.success}</td>
-                                  <td className="text-center">{this.state.data.description}</td>
-                                  <td className="text-center">{this.state.data.challenge}</td>
-                                  <td className="text-center">{this.state.data.hint}</td>
-                                  <td className="text-center">{this.state.data.plaintext}</td>
-                                  <td className="text-center">{this.state.data.ciphertext}</td>
+            <div className="section section-signup">
+            <Container>
+              <div className="squares square-1" />
+              <div className="squares square-2" />
+              <div className="squares square-3" />
+              <div className="squares square-4" />
+              <Row className="row-grid justify-content-between align-items-center">
+                <Col className="mb-lg-auto" lg="8">
+                  <h2 className="title">Solve Challenge</h2>
+                  <Card className="card-register">
+                    <CardBody>
+                      <Form className="form" onSubmit = {this.handleSubmit}>
+                        <FormGroup>
+                          <Label for="ciphertextField">Ciphertext</Label>
+                          <Input
+                            onChange={this.onChange}
+                            type="text"
+                            name="ciphertext"
+                            id="ciphertextField"
+                            placeholder="Enter the ciphertext"
+                            required
+                          />
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="plaintextField">Plaintext</Label>
+                          <Input
+                            onChange={this.onChange}
+                            type="text"
+                            name="plaintext"
+                            id="plaintextField"
+                            placeholder="Enter the decrypted plaintext"
+                            required
+                          />
+                        </FormGroup>
+                       
 
-                                </tr>
-                            }
-                          </tbody>
-                      </Table>
-                      </CardBody>
-                      <CardFooter>
-                        <Button className="btn-round" color="primary" size="lg" tag={Link} to="/solve-c">
-                          Solve challenge
-                        </Button>
-                      </CardFooter>
-                    </Card>
-                  </Col>
-                </Row>
-                <div className="register-bg" />
-                <div
-                  className="square square-1"
-                  id="square1"
-                  style={{ transform: this.state.squares1to6 }}
-                />
-                <div
-                  className="square square-2"
-                  id="square2"
-                  style={{ transform: this.state.squares1to6 }}
-                />
-                <div
-                  className="square square-3"
-                  id="square3"
-                  style={{ transform: this.state.squares1to6 }}
-                />
-                <div
-                  className="square square-4"
-                  id="square4"
-                  style={{ transform: this.state.squares1to6 }}
-                />
-                <div
-                  className="square square-5"
-                  id="square5"
-                  style={{ transform: this.state.squares1to6 }}
-                />
-                <div
-                  className="square square-6"
-                  id="square6"
-                  style={{ transform: this.state.squares1to6 }}
-                />
-              </Container>
+                       
+                      <Button className="btn-round" color="primary" size="lg">
+                        Submit
+                      </Button>
+                      </Form>
+                    </CardBody>
+                  </Card>
+                </Col>
+                <Col lg="4">
+                  <h3 className="display-3 text-white">
+                    Enter the Plain Text{" "}
+                    <span className="text-white">and Cipher Text</span>
+                  </h3>
+                  
+                </Col>
+                
+              </Row>
+            </Container>
             </div>
-          </div>
           <Footer />
         </div>
       </>

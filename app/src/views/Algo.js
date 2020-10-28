@@ -148,7 +148,7 @@ class Algo extends React.Component {
                       </Table>
                       </CardBody>
                       <CardFooter>
-                        <Button className="btn-round" color="primary" size="lg" tag={Link} to="/add-scheme">
+                        <Button className="btn-round" color="primary" size="lg" tag={Link} to = {`/solve-challenge/${this.state.data.id}`}>
                           Solve challenge
                         </Button>
                       </CardFooter>
