@@ -3,15 +3,13 @@ from . import db
 from .models import Algorithm
 from werkzeug.utils import secure_filename
 import json
+import subprocess
 
 main = Blueprint('main', __name__)
 
 @main.route('/add_algorithm', methods=['POST'])
 def add_algorithm():
     algo_data = request.form
-    selectedFile = request.files['selectedFile']
-    filename = "XXXX.txt"
-    selectedFile.save(filename)
 
     new_algo = \
         Algorithm(
@@ -27,6 +25,11 @@ def add_algorithm():
         )
     db.session.add(new_algo)
     db.session.commit()
+
+    selectedFile = request.files['selectedFile']
+    filename = str(new_algo.id) + ".zip"
+    selectedFile.save(filename)
+    subprocess.run(["unzip", filename])
 
     return 'Algorithm Added Successfully', 201
 
@@ -49,3 +52,33 @@ def solve_challenge():
 	data = {'id' : data.id, 'name' : data.name, 'type' : data.type, 'description' : data.description, 'challenge' : data.challenge, 'hint' : data.hint, 'plaintext' : data.plaintext, 'ciphertext' : data.ciphertext, 'attempts' : data.attempts, 'success' : data.success}
     # return json.dumps(data)
 	return "Hello ji challenge solve karlo" + str(request.args.get('id'))
+
+@main.route('/encrypt', methods = ['POST'])
+def encrypt():
+    id = request.get_json()['id']
+    plaintext = request.get_json()['plaintext']
+    data = Algorithm.query.get(id)
+    # file to run would be data.name / encrypt / plaintext
+    encryptFile = data.name + "/encrypt.py"
+
+    res = subprocess.run(["python3", encryptFile, plaintext], stdout = subprocess.PIPE)
+
+    ciphertext = res.stdout.decode('utf-8')[:-1]
+
+    ciphertext = {"ciphertext": ciphertext}
+    return json.dumps(ciphertext)
+
+@main.route('/decrypt', methods = ['POST'])
+def encrypt():
+    id = request.get_json()['id']
+    ciphertext = request.get_json()['ciphertext']
+    data = Algorithm.query.get(id)
+    # file to run would be data.name / encrypt / plaintext
+    decryptFile = data.name + "/decrypt.py"
+
+    res = subprocess.run(["python3", decryptFile, ciphertext], stdout = subprocess.PIPE)
+
+    plaintext = res.stdout.decode('utf-8')[:-1]
+
+    plaintext = {"ciphertext": plaintext}
+    return json.dumps(plaintext)
