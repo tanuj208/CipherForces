@@ -47,15 +47,34 @@ import Footer from "components/Footer/Footer.js";
 
 class SolveChallenge extends React.Component {
   state = {
-    data : {}
+    data : {},
+    answer : ""
   };
   constructor(props) {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChange = this.onChange.bind(this); 
   }
-  handleSubmit() {
-    var url = new URL("http://localhost:5000/solve-challenge");
+  componentDidMount() {
+    var url = new URL('http://localhost:5000/get_algo')
+    var id_val = this.props.match.params.id
+    console.log("aaaaaaaaaaaaaaaaa");
+    console.log(id_val);
+    url.searchParams.append('id', id_val)
+    fetch(url)
+    .then(res => res.json())
+    .then(result => {
+        this.setState({
+          data : JSON.parse(JSON.stringify(result))
+        });
+    });
+    console.log(this.state.data);
+    document.body.classList.toggle("index-page");
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    var url = new URL("http://localhost:5000/encrypt");
     const data = new FormData();
     Object.keys(this.state.data).forEach(key => data.append(key, this.state.data[key]))
     const requestOptions = {
@@ -67,14 +86,26 @@ class SolveChallenge extends React.Component {
     // {
     //   console.log(key[0], "F", key[1]);
     // }
-    console.log(requestOptions);
+    // var response = "FOLAAAA"
+    // console.log(requestOptions);
+    // fetch(url, requestOptions)
+    // .then(response => {
+    //     console.log("geeting");
+    //     console.log(response);
+    //     for(var key in response){
+    //       console.log(key, response[key])
+    //     }
+    // });
+
     fetch(url, requestOptions)
-    .then(response => {
-        console.log(response);
-        // for(var key in response){
-        //   console.log(key, response[key])
-        // }
+    .then(res => res.json())
+    .then(res => {
+        console.log(res)
+        this.setState({
+          answer : res["ciphertext"]
+        });
     });
+    // this.state.data = response;
   }
   onChange(e) {
     
@@ -83,19 +114,12 @@ class SolveChallenge extends React.Component {
       newState['plaintext'] = e.target.value;
       this.setState({data : newState});
     }
-    else if(e.target.id === 'ciphertextField') {
-      let newState = Object.assign({}, this.state.data);
-      newState['ciphertext'] = e.target.value;
-      this.setState({data : newState});
-    }
-  }
-  componentDidMount() {
-    document.body.classList.toggle("index-page");
   }
   componentWillUnmount() {
     document.body.classList.toggle("index-page");
   }
   render() {
+    console.log(this.state);
     return (
       <>
         <IndexNavbar />
@@ -113,28 +137,18 @@ class SolveChallenge extends React.Component {
                     <CardBody>
                       <Form className="form" onSubmit = {this.handleSubmit}>
                         <FormGroup>
-                          <Label for="ciphertextField">Ciphertext</Label>
-                          <Input
-                            onChange={this.onChange}
-                            type="text"
-                            name="ciphertext"
-                            id="ciphertextField"
-                            placeholder="Enter the ciphertext"
-                            required
-                          />
-                        </FormGroup>
-                        <FormGroup>
-                          <Label for="plaintextField">Plaintext</Label>
+                          <Label for="ciphertextField">Plaintext</Label>
                           <Input
                             onChange={this.onChange}
                             type="text"
                             name="plaintext"
                             id="plaintextField"
-                            placeholder="Enter the decrypted plaintext"
+                            placeholder="Enter plain text"
                             required
                           />
                         </FormGroup>
-                       
+                      <div>{this.state.answer}</div>
+      
 
                        
                       <Button className="btn-round" color="primary" size="lg">
