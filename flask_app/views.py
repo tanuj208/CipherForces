@@ -54,17 +54,15 @@ def solve_challenge():
 
 @main.route('/encrypt', methods = ['POST'])
 def encrypt():
-	dataa = request.form
-	id = dataa['id']
-	plaintext = dataa['plaintext']
-	print("aa$$" + plaintext)
-	# data = Algorithm.query.get(id)
-	# encryptFile = data.name + "/encrypt.py"
-	# res = subprocess.run(["python3", encryptFile, plaintext], stdout = subprocess.PIPE)
-	# ciphertext = res.stdout.decode('utf-8')[:-1]
-	ciphertext = {"ciphertext": "sexyy"}
-	print(ciphertext["ciphertext"] + "is there !!!!!!!!!!!!!!!")
-	return json.dumps(ciphertext)
+    dataa = request.form
+    id = dataa['id']
+    plaintext = dataa['plaintext']
+    data = Algorithm.query.get(id)
+    encryptFile = data.name + "/encrypt.py"
+    res = subprocess.run(["python3", encryptFile, plaintext], stdout = subprocess.PIPE)
+    ciphertext = res.stdout.decode('utf-8')[:-1]
+    ciphertext = {"ciphertext": ciphertext}
+    return json.dumps(ciphertext)
 
 @main.route('/decrypt', methods = ['POST'])
 def decrypt():

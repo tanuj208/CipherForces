@@ -1,4 +1,5 @@
 import json
+import sys
 
 class RC4:
     def __init__(self):
@@ -12,7 +13,7 @@ class RC4:
     def get_key(self):
         """Extract Keys from json file"""
         
-        with open('keys.json') as f:
+        with open('rc4/keys.json') as f:
             keys = json.load(f)
         return keys['key']
 
@@ -39,7 +40,8 @@ class RC4:
         return cipher
 
 def take_input():
-    plain_text = input("Enter the message to be encrypted: ")
+    # plain_text = input("Enter the message to be encrypted: ")
+    plain_text = sys.argv[1]
     return plain_text
 
 if __name__ == '__main__':
