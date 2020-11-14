@@ -48,7 +48,7 @@ import Footer from "components/Footer/Footer.js";
 class SolveChallenge extends React.Component {
   state = {
     data : {},
-    answer : ""
+    answer : "None"
   };
   constructor(props) {
     super(props);
@@ -132,7 +132,31 @@ class SolveChallenge extends React.Component {
               <div className="squares square-4" />
               <Row className="row-grid justify-content-between align-items-center">
                 <Col className="mb-lg-auto" lg="8">
-                  <h2 className="title">Solve Challenge</h2>
+                  <h2 className="title">{this.state.data.name}</h2>
+                  <Card>
+                  <CardBody>
+                  <Label> Description </Label>
+                  <div>
+                  {this.state.data.description}
+                  </div>
+                  </CardBody>
+                  </Card>
+                  <Card>
+                  <CardBody>
+                  <Label> Hint </Label>
+                  <div>
+                  {this.state.data.hint}
+                  </div>
+                  </CardBody>
+                  </Card>
+                  <Card>
+                  <CardBody>
+                  <Label> Challenge </Label>
+                  <div>
+                  {this.state.data.challenge}
+                  </div>
+                  </CardBody>
+                  </Card>
                   <Card className="card-register">
                     <CardBody>
                       <Form className="form" onSubmit = {this.handleSubmit}>
@@ -147,21 +171,27 @@ class SolveChallenge extends React.Component {
                             required
                           />
                         </FormGroup>
-                      <div>{this.state.answer}</div>
+                      
       
 
                        
                       <Button className="btn-round" color="primary" size="lg">
-                        Submit
+                        Encrypt
                       </Button>
+
                       </Form>
                     </CardBody>
                   </Card>
+                  <Card>
+                  <CardBody>
+                      <div> Corresponding Cipher Text :- {this.state.answer} </div>
+                  </CardBody>
+                  </Card>
                 </Col>
-                <Col lg="4">
+                <Col lg="4">  
                   <h3 className="display-3 text-white">
-                    Enter the Plain Text{" "}
-                    <span className="text-white">and Cipher Text</span>
+                    Algorithm Details 
+                    <span className="text-white"> and SIA dialog box</span>
                   </h3>
                   
                 </Col>

@@ -122,11 +122,7 @@ class Algo extends React.Component {
                                   <th>Type</th>
                                   <th className="text-center">Attempts</th>
                                   <th className="text-center">Success</th>
-                                  <th className="text-center">Description</th>
-                                  <th className="text-center">Challenge</th>
-                                  <th className="text-center">Hint</th>
-                                  <th className="text-center">Plaintext</th>
-                                  <th className="text-center">Ciphertext</th>
+                                  
                               </tr>
                           </thead>
                           <tbody>
@@ -137,11 +133,7 @@ class Algo extends React.Component {
                                   <td>{this.state.data.type}</td>
                                   <td className="text-center">{this.state.data.attempts}</td>
                                   <td className="text-center">{this.state.data.success}</td>
-                                  <td className="text-center">{this.state.data.description}</td>
-                                  <td className="text-center">{this.state.data.challenge}</td>
-                                  <td className="text-center">{this.state.data.hint}</td>
-                                  <td className="text-center">{this.state.data.plaintext}</td>
-                                  <td className="text-center">{this.state.data.ciphertext}</td>
+                                  
 
                                 </tr>
                             }
