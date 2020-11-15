@@ -122,6 +122,8 @@ class Algo extends React.Component {
                                   <th>Type</th>
                                   <th className="text-center">Attempts</th>
                                   <th className="text-center">Success</th>
+                                  <th className="text-center">Way to Portal</th>
+
                                   
                               </tr>
                           </thead>
@@ -133,6 +135,9 @@ class Algo extends React.Component {
                                   <td>{this.state.data.type}</td>
                                   <td className="text-center">{this.state.data.attempts}</td>
                                   <td className="text-center">{this.state.data.success}</td>
+                                  <td className="text-center"><Button className="btn-round" color="primary" size="sm" tag={Link} to = {`/solve-challenge/${this.state.data.id}`}>
+                          Solve
+                        </Button></td>
                                   
 
                                 </tr>
@@ -141,9 +146,7 @@ class Algo extends React.Component {
                       </Table>
                       </CardBody>
                       <CardFooter>
-                        <Button className="btn-round" color="primary" size="lg" tag={Link} to = {`/solve-challenge/${this.state.data.id}`}>
-                          Solve challenge
-                        </Button>
+                        
                       </CardFooter>
                     </Card>
                   </Col>

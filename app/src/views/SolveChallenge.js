@@ -48,7 +48,9 @@ import Footer from "components/Footer/Footer.js";
 class SolveChallenge extends React.Component {
   state = {
     data : {},
-    answer : "None"
+    answer : "None",
+    hintflag : 0,
+    status : "Unsolved"
   };
   constructor(props) {
     super(props);
@@ -71,7 +73,27 @@ class SolveChallenge extends React.Component {
     console.log(this.state.data);
     document.body.classList.toggle("index-page");
   }
-
+  handleHint(event) {
+    event.preventDefault();
+    this.setState({
+      hintflag : !this.state.hintflag
+    });
+  }
+  handleSolve(event) {
+    event.preventDefault();
+    if(this.state.data.providedSolution == this.state.data.ciphertext)
+    {
+      this.setState({
+        status : "SUCCESS"
+      });
+    }
+    else
+    {
+      this.setState({
+        status : "WRONG ANSWER"
+      });
+    }
+  }
   handleSubmit(event) {
     event.preventDefault();
     var url = new URL("http://localhost:5000/encrypt");
@@ -114,6 +136,11 @@ class SolveChallenge extends React.Component {
       newState['plaintext'] = e.target.value;
       this.setState({data : newState});
     }
+    else if(e.target.id === 'solutionField') {
+      let newState = Object.assign({}, this.state.data);
+      newState['providedSolution'] = e.target.value;
+      this.setState({data : newState});
+    }
   }
   componentWillUnmount() {
     document.body.classList.toggle("index-page");
@@ -145,7 +172,12 @@ class SolveChallenge extends React.Component {
                   <CardBody>
                   <Label> Hint </Label>
                   <div>
+                  <Button className="btn-icon" color="primary" size="sm" onClick={this.handleHint.bind(this)}>
+                  :)
+                  </Button>
+                  {this.state.hintflag == 1 && <div>
                   {this.state.data.hint}
+                  </div>}
                   </div>
                   </CardBody>
                   </Card>
@@ -185,6 +217,31 @@ class SolveChallenge extends React.Component {
                   <Card>
                   <CardBody>
                       <div> Corresponding Cipher Text :- {this.state.answer} </div>
+                  </CardBody>
+                  </Card>
+                  <Card>
+                  <CardBody>
+                    <Form className="form" onSubmit = {this.handleSolve.bind(this)}>
+                        <FormGroup>
+                          <Label for="answerField">Your Answer</Label>
+                          <Input
+                            onChange={this.onChange}
+                            type="text"
+                            name="solution"
+                            id="solutionField"
+                            placeholder="Enter solution"
+                            required
+                          />
+                        </FormGroup>
+                        <Button className="btn-round" color="primary" size="lg">
+                        Submit Answer
+                      </Button>
+                  </Form>
+                  </CardBody>
+                  </Card>
+                  <Card>
+                  <CardBody>
+                      <div> Verdict :- {this.state.status} </div>
                   </CardBody>
                   </Card>
                 </Col>

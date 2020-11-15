@@ -117,10 +117,9 @@ class Algorithms extends React.Component {
                           <thead>
                               <tr>
                                   <th className="text-center">#</th>
-                                  <th>Name</th>
-                                  <th>Type</th>
-                                  <th className="text-center">Attempts</th>
-                                  <th className="text-center">Success</th>
+                                  
+                                  <th>Class of algorithms</th>
+                                  <th className="text-center">Number of Algorithms</th>
                                   <th className="text-center">Actions</th>
                               </tr>
                           </thead>
@@ -130,20 +129,16 @@ class Algorithms extends React.Component {
                                   return(
                                     <tr key = {index}>
                                       <td className="text-center">{row.id}</td>
-                                      <td>{row.name}</td>
+                                      
                                       <td>{row.type}</td>
-                                      <td className="text-center">{row.attempts}</td>
+                                
                                       <td className="text-center">{row.success}</td>
                                       <td className="text-center">
                                       <Button className="btn-icon btn-simple" color="info" size="sm" tag={Link} to={`/algo/${row.id}`}>
                                           <i className="fa fa-user"></i>
                                       </Button>{` `}
-                                      <Button className="btn-icon btn-simple" color="success" size="sm">
-                                          <i className="fa fa-edit"></i>
-                                      </Button>{` `}
-                                      <Button className="btn-icon btn-simple" color="danger" size="sm">
-                                          <i className="fa fa-times" />
-                                      </Button>{` `}
+                                     
+                                     
                                       </td>
                                     </tr>
                                   )
