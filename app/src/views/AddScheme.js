@@ -47,7 +47,7 @@ import Footer from "components/Footer/Footer.js";
 
 class AddScheme extends React.Component {
   state = {
-    data : {}
+    data : {level: 1}
   };
   constructor(props) {
     super(props);
@@ -67,10 +67,14 @@ class AddScheme extends React.Component {
     // {
     //   console.log(key[0], "F", key[1]);
     // }
-    console.log(requestOptions);
+    console.log(this.state.data);
+    console.log(data.get("name"));
+    console.log("url ^^^");
     fetch(url, requestOptions)
     .then(response => {
+        console.log("received");
         console.log(response);
+        console.log("done");
         // for(var key in response){
         //   console.log(key, response[key])
         // }
@@ -102,14 +106,14 @@ class AddScheme extends React.Component {
       newState['hint'] = e.target.value;
       this.setState({data : newState});
     }
-    else if(e.target.id === 'plaintextField') {
+    else if(e.target.id === 'solutionField') {
       let newState = Object.assign({}, this.state.data);
-      newState['plaintext'] = e.target.value;
+      newState['solution'] = e.target.value;
       this.setState({data : newState});
     }
-    else if(e.target.id === 'ciphertextField') {
+    else if(e.target.id === 'levelField') {
       let newState = Object.assign({}, this.state.data);
-      newState['ciphertext'] = e.target.value;
+      newState['level'] = e.target.value;
       this.setState({data : newState});
     }
     else {
@@ -198,26 +202,30 @@ class AddScheme extends React.Component {
                         </FormGroup>
                         
                         <FormGroup>
-                          <Label for="plaintextField">Plaintext</Label>
+                          <Label for="solutionField">Solution</Label>
                           <Input
                             onChange={this.onChange}
                             type="text"
-                            name="plaintext"
-                            id="plaintextField"
-                            placeholder="Enter Plaintext to be found"
+                            name="solution"
+                            id="solutionField"
+                            placeholder="Enter solution of the challenge"
                             required
                           />
                         </FormGroup>
+
                         <FormGroup>
-                          <Label for="ciphertextField">Ciphertext</Label>
-                          <Input
-                            onChange={this.onChange}
+                          <Label for="levelField">Level</Label>
+                          <select onChange={this.onChange}
                             type="text"
-                            name="ciphertext"
-                            id="ciphertextField"
-                            placeholder="Enter Ciphertext for challenge"
+                            name="level"
+                            id="levelField"
                             required
-                          />
+                          >
+                          <option value = "1">1</option>
+                          <option value = "2">2</option>
+                          <option value = "3">3</option>
+                          <option value = "4">4</option>
+                          </select> 
                         </FormGroup>
 
                         <FormGroup>

@@ -81,7 +81,7 @@ class SolveChallenge extends React.Component {
   }
   handleSolve(event) {
     event.preventDefault();
-    if(this.state.data.providedSolution == this.state.data.ciphertext)
+    if(this.state.data.providedSolution == this.state.data.solution)
     {
       this.setState({
         status : "SUCCESS"

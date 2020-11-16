@@ -49,12 +49,57 @@ class Algorithms extends React.Component {
   state = {
     squares1to6: "",
     squares7and8: "",
-    data : [] 
+    c1: 0,
+    c2: 0,
+    c3: 0,
+    c4: 0
   };
   componentDidMount() {
     console.log("done");
     document.body.classList.toggle("register-page");
     document.documentElement.addEventListener("mousemove", this.followCursor);
+
+    var url1 = new URL('http://localhost:5000/get_level_count')
+    url1.searchParams.append('level', 1)
+    fetch(url1)
+    .then(res => res.json())
+    .then(result => {
+        this.setState({
+          c1 : result
+        });
+    });
+
+    var url2 = new URL('http://localhost:5000/get_level_count')
+    url2.searchParams.append('level', 2)
+    fetch(url2)
+    .then(res => res.json())
+    .then(result => {
+        this.setState({
+          c2 : result
+        });
+    });
+
+    var url3 = new URL('http://localhost:5000/get_level_count')
+    url3.searchParams.append('level', 3)
+    fetch(url3)
+    .then(res => res.json())
+    .then(result => {
+        this.setState({
+          c3 : result
+        });
+    });
+
+    var url4 = new URL('http://localhost:5000/get_level_count')
+    url4.searchParams.append('level', 4)
+    fetch(url4)
+    .then(res => res.json())
+    .then(result => {
+        this.setState({
+          c4 : result
+        });
+    });
+
+    
     fetch('http://localhost:5000/algorithms')
     .then(res => res.json())
     .then(result => {
@@ -116,34 +161,49 @@ class Algorithms extends React.Component {
                         <Table responsive>
                           <thead>
                               <tr>
-                                  <th className="text-center">#</th>
                                   
-                                  <th>Class of algorithms</th>
+                                  <th className="text-center">Level of algorithms</th>
                                   <th className="text-center">Number of Algorithms</th>
-                                  <th className="text-center">Actions</th>
+                                  <th className="text-center">Solve</th>
                               </tr>
                           </thead>
                           <tbody>
-                            {
-                                this.state.data.map( (row, index) => {
-                                  return(
-                                    <tr key = {index}>
-                                      <td className="text-center">{row.id}</td>
-                                      
-                                      <td>{row.type}</td>
-                                
-                                      <td className="text-center">{row.success}</td>
-                                      <td className="text-center">
-                                      <Button className="btn-icon btn-simple" color="info" size="sm" tag={Link} to={`/algo/${row.id}`}>
-                                          <i className="fa fa-user"></i>
-                                      </Button>{` `}
-                                     
-                                     
-                                      </td>
-                                    </tr>
-                                  )
-                                })
-                            }
+                            <tr>
+                              <td className="text-center">1</td>
+                              <td className="text-center">{this.state.c1}</td>
+                              <td className="text-center">
+                                  <Button className="btn-icon btn-simple" color="info" size="sm" tag={Link} to={`/algo/${1}`}>
+                                      <i className="fa fa-user"></i>
+                                  </Button>{` `}
+                               </td>
+                            </tr>
+                            <tr>
+                              <td className="text-center">2</td>
+                              <td className="text-center">{this.state.c2}</td>
+                              <td className="text-center">
+                                  <Button className="btn-icon btn-simple" color="info" size="sm" tag={Link} to={`/algo/${2}`}>
+                                      <i className="fa fa-user"></i>
+                                  </Button>{` `}
+                               </td>
+                            </tr>
+                            <tr>
+                              <td className="text-center">3</td>
+                              <td className="text-center">{this.state.c3}</td>
+                              <td className="text-center">
+                                  <Button className="btn-icon btn-simple" color="info" size="sm" tag={Link} to={`/algo/${3}`}>
+                                      <i className="fa fa-user"></i>
+                                  </Button>{` `}
+                               </td>
+                            </tr>
+                            <tr>
+                              <td className="text-center">4</td>
+                              <td className="text-center">{this.state.c4}</td>
+                              <td className="text-center">
+                                  <Button className="btn-icon btn-simple" color="info" size="sm" tag={Link} to={`/algo/${4}`}>
+                                      <i className="fa fa-user"></i>
+                                  </Button>{` `}
+                               </td>
+                            </tr>
                           </tbody>
                       </Table>
                       </CardBody>

@@ -16,22 +16,22 @@ class Algorithm(db.Model):
     description = db.Column(db.String(100))
     challenge = db.Column(db.String(100))
     hint = db.Column(db.String(100))
-    plaintext = db.Column(db.String(100))
-    ciphertext = db.Column(db.String(100))
+    solution = db.Column(db.String(100))
     attempts = db.Column(db.Integer)
     success = db.Column(db.Integer)	
+    level = db.Column(db.Integer)
 
-    def __init__(self, id, name, type, description, challenge, hint, plaintext, ciphertext, attempts, success):
+    def __init__(self, id, name, type, description, challenge, hint, solution, attempts, success, level):
         self.id = id
         self.name = name
         self.type = type
         self.description = description
-        self.challenge = challenge
+        self.challenge = challenge	
         self.hint = hint
-        self.plaintext = plaintext
-        self.ciphertext = ciphertext
+        self.solution = solution
         self.attempts = attempts
         self.success = success
+        self.level = level
 
 
 def create_app():
@@ -48,9 +48,3 @@ def create_app():
 
 app = create_app()
 CORS(app)
-
-@app.route('/')
-def Get_Data():
-    data = Algorithm.query.all()
-    all_rows = [{'id' : row.id, 'name' : row.name, 'type' : row.type, 'description' : row.description, 'challenge' : row.challenge, 'hint' : row.hint, 'plaintext' : row.plaintext, 'ciphertext' : row.ciphertext, 'attempts' : row.attempts, 'success' : row.success} for row in data]
-    return (json.dumps(all_rows))

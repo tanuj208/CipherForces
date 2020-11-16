@@ -52,9 +52,10 @@ class Algo extends React.Component {
     data : [] 
   };
   componentDidMount() {
-    var url = new URL('http://localhost:5000/get_algo')
+    var url = new URL('http://localhost:5000/get_algo_level')
     var id_val = this.props.match.params.id
-    url.searchParams.append('id', id_val)
+    url.searchParams.append('level', id_val)
+    // console.log("sending");
     fetch(url)
     .then(res => res.json())
     .then(result => {
@@ -62,6 +63,7 @@ class Algo extends React.Component {
           data : JSON.parse(JSON.stringify(result))
         });
     });
+    // console.log("done");
     console.log(this.state.data);
   }
   componentWillUnmount() {
@@ -129,18 +131,20 @@ class Algo extends React.Component {
                           </thead>
                           <tbody>
                             {
-                                <tr key = {this.state.data.id}>
-                                  <td className="text-center">{this.state.data.id}{this.props.match.params.id}</td>
-                                  <td>{this.state.data.name}</td>
-                                  <td>{this.state.data.type}</td>
-                                  <td className="text-center">{this.state.data.attempts}</td>
-                                  <td className="text-center">{this.state.data.success}</td>
-                                  <td className="text-center"><Button className="btn-round" color="primary" size="sm" tag={Link} to = {`/solve-challenge/${this.state.data.id}`}>
+                                this.state.data.map( (row, index) => {
+                                  return(
+                                    <tr key = {index}>
+                                      <td className="text-center">{index + 1}</td>
+                                      <td>{row.name}</td>
+                                      <td>{row.type}</td>
+                                      <td className="text-center">{row.attempts}</td>
+                                      <td className="text-center">{row.success}</td>
+                                      <td className="text-center"><Button className="btn-round" color="primary" size="sm" tag={Link} to = {`/solve-challenge/${row.id}`}>
                           Solve
                         </Button></td>
-                                  
-
-                                </tr>
+                                    </tr>
+                                  )
+                                })
                             }
                           </tbody>
                       </Table>
