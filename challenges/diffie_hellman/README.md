@@ -19,7 +19,8 @@ Encrypted message = \x04sÍÃkÑ\x00\x04\x89\x10å\x8a)
 Find out the original message used.
 
 # Access
-You can look at the code but you do not have access to encryption or decryption server (with the same key value as in the problem).
+You can look at the encryption code but you do not have access to encryption or decryption server (with the same key value as in the problem).
 
 # Solution
 Since value of generator is very small & you can see that public key of Alice is way smaller than prime p, secret key of Alice is also small. You can do a bruteforce search on Alice's secret key & get it. Then, you can compute the super key & break the algorithm.
+Answer = Hello world

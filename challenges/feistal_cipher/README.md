@@ -20,3 +20,4 @@ You can look at the code but you do not have access to encryption or decryption 
 Using the plaintext-ciphertext pair (called the known plaintext attack), you can easily find the value of both keys. Then, using those keys, decryption is very easy.
 How to find out the keys?
 Let the left & right portion of plaintext is (L, R). If keys in rounds are k1 & k2 respectively. Then ciphertext generated will be (L xor R xor k1, L xor k1 xor k2) (Let it be (X, Y)). Now, k1 = X xor L xor R & k2 = Y xor L xor k1. 
+Ans = kaboom
