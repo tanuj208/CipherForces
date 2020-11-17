@@ -206,7 +206,7 @@ class SolveChallenge extends React.Component {
                   <Card>
                   <CardBody>
                   <Label> Description </Label>
-                  <div>
+                  <div style={{whiteSpace : 'pre-wrap'}}>
                   <font color = "white">
                   {this.state.data.description}</font>
                   </div>
