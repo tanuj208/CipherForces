@@ -233,10 +233,10 @@ class AddScheme extends React.Component {
                             id="levelField"
                             required
                           >
-                          <option value = "1">1</option>
-                          <option value = "2">2</option>
-                          <option value = "3">3</option>
-                          <option value = "4">4</option>
+                          <option value = "1">Ancient Cipher</option>
+                          <option value = "2">Public Key</option>
+                          <option value = "3">Hashing</option>
+                          <option value = "4">Miscellaneous</option>
                           </select> 
                         </FormGroup>
 
