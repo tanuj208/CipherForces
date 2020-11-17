@@ -230,7 +230,7 @@ class SolveChallenge extends React.Component {
                   <Card>
                   <CardBody>
                   <Label> Challenge </Label>
-                  <div>
+                  <div style={{whiteSpace : 'pre-wrap'}}>
                   <font color = "white">
                   {this.state.data.challenge}
                   </font>
@@ -267,7 +267,8 @@ class SolveChallenge extends React.Component {
                   </Card>}
                 </Col>
                 <Col lg="4">
-                <h2 className="title">SIA</h2>
+                {(this.state.data.allow_encrypt != "no" || this.state.data.allow_decrypt != "no") &&  
+                <h2 className="title">SIA</h2>}
                 {this.state.data.allow_encrypt == "yes" &&
                   <Card className="card-register">
                     <CardBody>
