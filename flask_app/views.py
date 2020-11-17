@@ -94,6 +94,5 @@ def decrypt():
 
     plaintext = res.stdout.decode('utf-8')[:-1]
 
-    plaintext = {"ciphertext": plaintext}
-    print(plaintext + "boom")
+    plaintext = {"plaintext": plaintext}
     return json.dumps(plaintext)
