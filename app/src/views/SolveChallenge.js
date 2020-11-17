@@ -177,6 +177,8 @@ class SolveChallenge extends React.Component {
                   </Button>
                   {this.state.hintflag == 1 && <div>
                   {this.state.data.hint}
+                  aa
+                  {this.state.data.allow_encrypt}
                   </div>}
                   </div>
                   </CardBody>
@@ -189,6 +191,7 @@ class SolveChallenge extends React.Component {
                   </div>
                   </CardBody>
                   </Card>
+                  {this.state.data.allow_encrypt == "yes" &&
                   <Card className="card-register">
                     <CardBody>
                       <Form className="form" onSubmit = {this.handleSubmit}>
@@ -213,12 +216,12 @@ class SolveChallenge extends React.Component {
 
                       </Form>
                     </CardBody>
-                  </Card>
-                  <Card>
+                  </Card>}
+                  {this.state.data.allow_encrypt == "yes" && <Card>
                   <CardBody>
                       <div> Corresponding Cipher Text :- {this.state.answer} </div>
                   </CardBody>
-                  </Card>
+                  </Card>}
                   <Card>
                   <CardBody>
                     <Form className="form" onSubmit = {this.handleSolve.bind(this)}>

@@ -116,6 +116,16 @@ class AddScheme extends React.Component {
       newState['level'] = e.target.value;
       this.setState({data : newState});
     }
+    else if(e.target.id === 'allowEncryptField') {
+      let newState = Object.assign({}, this.state.data);
+      newState['allow_encrypt'] = e.target.value;
+      this.setState({data : newState});
+    }
+    else if(e.target.id === 'allowDecryptField') {
+      let newState = Object.assign({}, this.state.data);
+      newState['allow_decrypt'] = e.target.value;
+      this.setState({data : newState});
+    }
     else {
       let newState = Object.assign({}, this.state.data);
       newState['selectedFile'] = e.target.files[0];
@@ -228,6 +238,30 @@ class AddScheme extends React.Component {
                           </select> 
                         </FormGroup>
 
+                        <FormGroup>
+                          <Label for="allowEncryptField">Allow Access to Encryption server?</Label>
+                          <select onChange={this.onChange}
+                            type="text"
+                            name="level"
+                            id="allowEncryptField"
+                            required
+                          >
+                          <option value = "yes">yes</option>
+                          <option value = "no">no</option>
+                          </select> 
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="allowEncryptField">Allow Access to Decryption server?</Label>
+                          <select onChange={this.onChange}
+                            type="text"
+                            name="level"
+                            id="allowDecryptField"
+                            required
+                          >
+                          <option value = "yes">yes</option>
+                          <option value = "no">no</option>
+                          </select> 
+                        </FormGroup>
                         <FormGroup>
                           <Label for="fileField">
                             <Button

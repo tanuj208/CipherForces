@@ -20,8 +20,10 @@ class Algorithm(db.Model):
     attempts = db.Column(db.Integer)
     success = db.Column(db.Integer)	
     level = db.Column(db.Integer)
+    allow_encrypt = db.Column(db.String(10))
+    allow_decrypt = db.Column(db.String(10))
 
-    def __init__(self, id, name, type, description, challenge, hint, solution, attempts, success, level):
+    def __init__(self, id, name, type, description, challenge, hint, solution, attempts, success, level, allow_encrypt, allow_decrypt):
         self.id = id
         self.name = name
         self.type = type
@@ -32,6 +34,8 @@ class Algorithm(db.Model):
         self.attempts = attempts
         self.success = success
         self.level = level
+        self.allow_decrypt = allow_decrypt
+        self.allow_encrypt = allow_encrypt
 
 
 def create_app():

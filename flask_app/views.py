@@ -24,7 +24,9 @@ def add_algorithm():
             solution = algo_data['solution'],
             level = algo_data['level'],
             attempts = 0,
-            success = 0
+            success = 0,
+            allow_encrypt = algo_data['allow_encrypt'],
+            allow_decrypt = algo_data['allow_decrypt']
         )
     print(new_algo)
     db.session.add(new_algo)
