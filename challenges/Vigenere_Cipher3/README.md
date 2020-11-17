@@ -22,7 +22,7 @@ Ex - Plaintext -> heythere
 
 # Problem Statement
 
-Given an enrypted message, find the plaintext.
+Given an enrypted message, find the plaintext.  
 Encrypted Message = "lrmknjfghaoklrmjzwwglkklurizdvwglzkllrmtzqfghaoklrmknjwglzklurizdvwglukf"
 
 # Access
