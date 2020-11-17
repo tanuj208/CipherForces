@@ -84,8 +84,9 @@ def encrypt():
 
 @main.route('/decrypt', methods = ['POST'])
 def decrypt():
-    id = request.get_json()['id']
-    ciphertext = request.get_json()['ciphertext']
+    dataa = request.form
+    id = dataa['id']
+    ciphertext = dataa['ciphertext']
     data = Algorithm.query.get(id)
     # file to run would be data.name / encrypt / plaintext
     decryptFile = data.name + "/decrypt.py"
