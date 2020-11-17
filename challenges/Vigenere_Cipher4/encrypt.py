@@ -18,7 +18,7 @@ def encrypt(plaintext, key):
 
 if __name__ == '__main__':
 	plaintext = sys.argv[1]
-	key_length = random.randint(len(plaintext)//3, len(plaintext)//2)
+	key_length = random.randint(len(plaintext)//8, len(plaintext)//6)
 	key = []
 	for i in range(key_length):
 		key.append(random.randint(0, 25))
