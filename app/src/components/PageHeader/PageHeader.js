@@ -36,7 +36,7 @@ class PageHeader extends React.Component {
           <div className="content-center brand">
             <h1 className="h1-seo">Breaking In!</h1>
             <h3 className="d-none d-sm-block">
-              A Crowsourced learning and testing Platform for Security Schemes
+              A Crowsourced learning Platform for Security Schemes
             </h3>
             <Button
                 className="btn-simple btn-round"

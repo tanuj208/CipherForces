@@ -207,7 +207,8 @@ class SolveChallenge extends React.Component {
                   <CardBody>
                   <Label> Description </Label>
                   <div>
-                  {this.state.data.description}
+                  <font color = "white">
+                  {this.state.data.description}</font>
                   </div>
                   </CardBody>
                   </Card>
@@ -218,11 +219,11 @@ class SolveChallenge extends React.Component {
                   <Button className="btn-icon" color="primary" size="sm" onClick={this.handleHint.bind(this)}>
                   :)
                   </Button>
+                  <font color = "white">
                   {this.state.hintflag == 1 && <div>
                   {this.state.data.hint}
-                  aa
-                  {this.state.data.allow_encrypt}
                   </div>}
+                  </font>
                   </div>
                   </CardBody>
                   </Card>
@@ -230,11 +231,44 @@ class SolveChallenge extends React.Component {
                   <CardBody>
                   <Label> Challenge </Label>
                   <div>
+                  <font color = "white">
                   {this.state.data.challenge}
+                  </font>
                   </div>
                   </CardBody>
                   </Card>
-                  {this.state.data.allow_encrypt == "yes" &&
+                  
+                  <Card>
+                  <CardBody>
+                    <Form className="form" onSubmit = {this.handleSolve.bind(this)}>
+                        <FormGroup>
+                          <Label for="answerField">Your Answer</Label>
+                          <Input
+                            onChange={this.onChange}
+                            type="text"
+                            name="solution"
+                            id="solutionField"
+                            placeholder="Enter solution"
+                            required
+                          />
+                        </FormGroup>
+                        <Button className="btn-round" color="primary" size="lg">
+                        Submit Answer
+                      </Button>
+                  </Form>
+                  </CardBody>
+                  </Card>
+                  {this.state.status != "Unsolved" && <Card>
+                  <CardBody>
+                  <font color = "white">
+                      <div> Verdict :- {this.state.status} </div>
+                  </font>
+                  </CardBody>
+                  </Card>}
+                </Col>
+                <Col lg="4">
+                <h2 className="title">SIA</h2>
+                {this.state.data.allow_encrypt == "yes" &&
                   <Card className="card-register">
                     <CardBody>
                       <Form className="form" onSubmit = {this.handleSubmit}>
@@ -260,16 +294,18 @@ class SolveChallenge extends React.Component {
                       </Form>
                     </CardBody>
                   </Card>}
-                  {this.state.data.allow_encrypt == "yes" && <Card>
+                  {this.state.data.allow_encrypt == "yes" && this.state.cipher != "None" && <Card>
                   <CardBody>
+                  <font color = "white">
                       <div> Corresponding Cipher Text :- {this.state.cipher} </div>
+                      </font>
                   </CardBody>
                   </Card>}
 
-                  {this.state.data.allow_decrypt == "yes" &&
+                  {this.state.data.allow_decrypt == "yes"  &&
                   <Card className="card-register">
                     <CardBody>
-                      <Form className="form" onSubmit = {this.handleSubmit}>
+                      <Form className="form" onSubmit = {this.handleSubmit2.bind(this)}>
                         <FormGroup>
                           <Label for="plaintextField">CipherText</Label>
                           <Input
@@ -292,44 +328,16 @@ class SolveChallenge extends React.Component {
                       </Form>
                     </CardBody>
                   </Card>}
-                  {this.state.data.allow_decrypt == "yes" && <Card>
+                  {this.state.data.allow_decrypt == "yes" && this.state.plain != "None" && <Card>
                   <CardBody>
+                  <font color = "white">
                       <div> Corresponding Plain Text :- {this.state.plain} </div>
+                  </font>
                   </CardBody>
                   </Card>}
 
-
-                  <Card>
-                  <CardBody>
-                    <Form className="form" onSubmit = {this.handleSolve.bind(this)}>
-                        <FormGroup>
-                          <Label for="answerField">Your Answer</Label>
-                          <Input
-                            onChange={this.onChange}
-                            type="text"
-                            name="solution"
-                            id="solutionField"
-                            placeholder="Enter solution"
-                            required
-                          />
-                        </FormGroup>
-                        <Button className="btn-round" color="primary" size="lg">
-                        Submit Answer
-                      </Button>
-                  </Form>
-                  </CardBody>
-                  </Card>
-                  <Card>
-                  <CardBody>
-                      <div> Verdict :- {this.state.status} </div>
-                  </CardBody>
-                  </Card>
-                </Col>
-                <Col lg="4">  
-                  <h3 className="display-3 text-white">
-                    Algorithm Details 
-                    <span className="text-white"> and SIA dialog box</span>
-                  </h3>
+  
+                  
                   
                 </Col>
                 
