@@ -8,6 +8,7 @@ def gen_keys(bits = 32):
 	p = number.getPrime(bits)
 	q = number.getPrime(bits)
 
+	print(p,q)
 	n = p*q
 	phi = (p-1)*(q-1)
 	e = rand_coprime_with(phi)
@@ -15,10 +16,10 @@ def gen_keys(bits = 32):
 
 	keys['public_key'] = {'n' : n, 'e' : e}
 	keys['private_key'] = {'d' : d}
-	with open('keys.json', 'w+') as f:
+	with open('RSA-3/keys.json', 'w+') as f:
 		json.dump(keys, f)
 	return keys
 
 if __name__ == '__main__':
-	a = gen_keys(256)
+	a = gen_keys(32)
 	print(a)

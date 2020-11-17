@@ -17,12 +17,10 @@ def decrypt(cipher, keys):
 	en_msg = cipher
 
 	dr_msg = []
-	for word in en_msg:
-		dr_word = pow(word, d, n)
-		dr_word = i2osp(dr_word, n.bit_length() // 8).decode()
-		dr_msg.append(dr_word)
+	for i in range(0, len(en_msg)):
+		dr_msg.append(chr(power(en_msg[i], d, n)))
 
-	return dr_msg
+	return dr_msg 
 
 
 if __name__ == '__main__':

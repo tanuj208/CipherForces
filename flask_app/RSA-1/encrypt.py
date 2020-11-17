@@ -13,11 +13,14 @@ def encrypt(msg, public_key):
 	e = public_key["e"]
 
 	en_msg = []
-	for word in msg.split():
-		word = os2ip(word.encode())
-		en_msg.append(pow(word,e,n))
+	for i in range(0, len(msg)): 
+		en_msg.append(msg[i]) 
+	for i in range(0, len(en_msg)):
+		en_msg[i] = power(ord(en_msg[i]), e, n)
+
 	cipher = en_msg
 	return cipher
+
 
 if __name__ == '__main__':
 

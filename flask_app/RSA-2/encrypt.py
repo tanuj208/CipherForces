@@ -1,5 +1,4 @@
 from helper import *
-from padding import *
 import json
 
 def get_keys():
@@ -13,18 +12,15 @@ def encrypt(msg, public_key):
 	n = public_key["n"]
 	e = public_key["e"]
 
-	msg = msg.encode()
+	en_msg = []
+	for i in range(0, len(msg)): 
+		en_msg.append(msg[i]) 
+	for i in range(0, len(en_msg)):
+		en_msg[i] = power(ord(en_msg[i]), e, n)
 
-	hlen = 20  # SHA-1 hash length
-	k = ceil(n.bit_length() / 8)
-	assert len(msg) <= k - hlen - 2
-
-	pd_msg = oaep_encode(msg, k)
-	pd_msg = os2ip(pd_msg)
-	en_msg = pow(pd_msg, e, n)
-
-	cipher = i2osp(en_msg, k)
+	cipher = en_msg
 	return cipher
+
 
 if __name__ == '__main__':
 
