@@ -37,6 +37,6 @@ So key length is 9.
 
 Once we have the length of key, we can see that if we consider characters of ciphertext at positions 1, key_length + 1, 2 * key_length + 1, ...., they form a simple caeser cipher which could be solved using frequency analysis.
 
-Algorithm to find plaintext -> Make groups of all positions of ciphertext mod key_length. For each string, use frequency anaylsis to brek the caeser cipher and get the characters at the positions.
+Algorithm to find plaintext -> Make groups of all positions of ciphertext mod key_length. For each string, use frequency anaylsis to break the caeser cipher and get the characters at the positions.
 
 Plaintext = "catchthecatandthedogthedogchasesthecat"
