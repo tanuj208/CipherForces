@@ -48,7 +48,7 @@ def algorithms():
 @main.route('/get_algo')
 def get_algo():
     data = Algorithm.query.get(request.args.get('id'))
-    data = {'id' : data.id, 'name' : data.name, 'type' : data.type, 'description' : data.description, 'challenge' : data.challenge, 'hint' : data.hint, 'solution' : data.solution, 'attempts' : data.attempts, 'success' : data.success, 'level' : data.level}
+    data = {'id' : data.id, 'name' : data.name, 'type' : data.type, 'description' : data.description, 'challenge' : data.challenge, 'hint' : data.hint, 'solution' : data.solution, 'attempts' : data.attempts, 'success' : data.success, 'level' : data.level, 'allow_encrypt' : data.allow_encrypt, 'allow_decrypt' : data.allow_decrypt}
     return json.dumps(data)
 
 @main.route('/get_algo_level')

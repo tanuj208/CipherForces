@@ -47,7 +47,9 @@ import Footer from "components/Footer/Footer.js";
 
 class AddScheme extends React.Component {
   state = {
-    data : {level: 1}
+    data : {level: 1,
+      allow_encrypt : "yes",
+      allow_decrypt : "yes"}
   };
   constructor(props) {
     super(props);
