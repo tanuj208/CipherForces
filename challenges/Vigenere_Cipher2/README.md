@@ -17,9 +17,9 @@ Ciphertext[i] = (m[Plaintext[i]] + m[key[i]]) % 26
 To get the character at position i of ciphertext, mapping of plaintext at position i and key at position i is added modulo 26.
 The final number is converted back to the corresponding alphabetical character by reverse mapping.
 
-Ex - Plaintext -> heythere
-     Key ->       catcatca
-     Ciphetext -> jervhxte
+Ex - Plaintext -> heythere  
+     Key ->       catcatca  
+     Ciphetext -> jervhxte  
 
 # Problem Statement
 
