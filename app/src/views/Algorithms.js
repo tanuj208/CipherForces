@@ -62,7 +62,7 @@ class Algorithms extends React.Component {
     var url1 = new URL('http://localhost:5000/get_level_count')
     url1.searchParams.append('level', 1)
     fetch(url1)
-    .then(res => res.json())
+    .then(res => res.text())
     .then(result => {
         this.setState({
           c1 : result

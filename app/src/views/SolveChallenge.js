@@ -86,7 +86,7 @@ class SolveChallenge extends React.Component {
     var id_val = this.props.match.params.id
     url.searchParams.append('id', id_val)
     fetch(url)
-    .then(res => res.json())
+    .then(res => res.text())
     .then(result => {
         console.log(result);
     });
@@ -96,7 +96,7 @@ class SolveChallenge extends React.Component {
       var id_val = this.props.match.params.id
       url.searchParams.append('id', id_val)
       fetch(url)
-      .then(res => res.json())
+      .then(res => res.text())
       .then(result => {
           console.log(result);
       });
