@@ -1,4 +1,5 @@
 import struct
+import sys
 
 def ini_variables():
     h0 = 0x67452301
@@ -92,8 +93,8 @@ def sha1(message):
     return '%08x%08x%08x%08x%08x' % (h0, h1, h2, h3, h4)
     
 if __name__ == '__main__':
-    print("Enter message to be encoded : ")
-    msg = input()
+    # print("Enter message to be encoded : ")
+    msg = sys.argv[1]
 
     cipher = sha1(msg.encode())
     print(cipher)    
