@@ -16,7 +16,7 @@ def gen_keys(bits = 32):
 
 	keys['public_key'] = {'n' : n, 'e' : e}
 	keys['private_key'] = {'d' : d}
-	with open('RSA-3/keys.json', 'w+') as f:
+	with open('keys.json', 'w+') as f:
 		json.dump(keys, f)
 	return keys
 
