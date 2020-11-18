@@ -12,7 +12,7 @@ class RC4:
     def get_key(self):
         """Extract Keys from json file"""
         
-        with open('rc4/keys.json') as f:
+        with open('keys.json') as f:
             keys = json.load(f)
         return keys['key']
 
