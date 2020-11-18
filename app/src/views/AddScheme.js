@@ -227,7 +227,8 @@ class AddScheme extends React.Component {
 
                         <FormGroup>
                           <Label for="levelField">Level</Label>
-                          <select onChange={this.onChange}
+                          <div>
+                          <select style={{textAlignLast : "center", borderRadius: "1em", background : "transparent", width: "180px", color : "inherit", height : "40px"}} onChange={this.onChange}
                             type="text"
                             name="level"
                             id="levelField"
@@ -237,12 +238,14 @@ class AddScheme extends React.Component {
                           <option value = "2">Public Key</option>
                           <option value = "3">Hashing</option>
                           <option value = "4">Miscellaneous</option>
-                          </select> 
+                          </select>
+                          </div> 
                         </FormGroup>
 
                         <FormGroup>
                           <Label for="allowEncryptField">Allow Access to Encryption server?</Label>
-                          <select onChange={this.onChange}
+                          <div>
+                          <select  style={{textAlignLast : "center", borderRadius: "1em", background : "transparent", width: "80px", color : "inherit", height : "40px"}} onChange={this.onChange}
                             type="text"
                             name="level"
                             id="allowEncryptField"
@@ -251,10 +254,12 @@ class AddScheme extends React.Component {
                           <option value = "yes">yes</option>
                           <option value = "no">no</option>
                           </select> 
+                          </div>
                         </FormGroup>
                         <FormGroup>
                           <Label for="allowEncryptField">Allow Access to Decryption server?</Label>
-                          <select onChange={this.onChange}
+                          <div>
+                          <select style={{textAlignLast : "center", borderRadius: "1em", background : "transparent", width: "80px", color : "inherit", height : "40px"}}  onChange={this.onChange}
                             type="text"
                             name="level"
                             id="allowDecryptField"
@@ -262,7 +267,8 @@ class AddScheme extends React.Component {
                           >
                           <option value = "yes">yes</option>
                           <option value = "no">no</option>
-                          </select> 
+                          </select>
+                          </div> 
                         </FormGroup>
                         <FormGroup>
                           <Label for="fileField">
