@@ -4,7 +4,7 @@ import json
 
 def get_keys():
 	"""Extracts key from json file."""
-	with open('RSA-3/keys.json') as f:
+	with open('keys.json') as f:
 		keys = json.load(f)
 	return keys
 
