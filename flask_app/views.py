@@ -3,6 +3,7 @@ from . import db
 from .models import Algorithm
 from werkzeug.utils import secure_filename
 import json
+import os
 import subprocess
 from sqlalchemy.sql import text
 
@@ -35,7 +36,18 @@ def add_algorithm():
     selectedFile = request.files['selectedFile']
     filename = str(new_algo.id) + ".zip"
     selectedFile.save(filename)
+    subprocess.run(["mkdir", str(new_algo.id)])
+    subprocess.run(["mv", filename, str(new_algo.id)])
+    os.chdir(str(new_algo.id))
     subprocess.run(["unzip", filename])
+    folder_name = ''
+    for file_name in os.listdir('.'):
+        if not os.path.isfile(file_name):
+            folder_name = file_name
+            subprocess.run(['mv', file_name, '../'])
+    os.chdir('../')
+    subprocess.run(['rm', '-rf', str(new_algo.id)])
+    subprocess.run(['mv', folder_name, str(new_algo.id)])
 
     return 'Algorithm Added Successfully', 201
 
@@ -75,11 +87,12 @@ def encrypt():
     dataa = request.form
     id = dataa['id']
     plaintext = dataa['plaintext']
-    data = Algorithm.query.get(id)
-    encryptFile = data.name + "/encrypt.py"
+    os.chdir(str(id))
+    encryptFile = "encrypt.py"
     res = subprocess.run(["python3", encryptFile, plaintext], stdout = subprocess.PIPE)
     ciphertext = res.stdout.decode('utf-8')[:-1]
     ciphertext = {"ciphertext": ciphertext}
+    os.chdir('..')
     return json.dumps(ciphertext)
 
 @main.route('/decrypt', methods = ['POST'])
@@ -87,13 +100,14 @@ def decrypt():
     dataa = request.form
     id = dataa['id']
     ciphertext = dataa['ciphertext']
-    data = Algorithm.query.get(id)
     # file to run would be data.name / encrypt / plaintext
-    decryptFile = data.name + "/decrypt.py"
+    os.chdir(str(id))
+    decryptFile = "decrypt.py"
 
     res = subprocess.run(["python3", decryptFile, ciphertext], stdout = subprocess.PIPE)
 
     plaintext = res.stdout.decode('utf-8')[:-1]
 
     plaintext = {"plaintext": plaintext}
+    os.chdir('..')
     return json.dumps(plaintext)
