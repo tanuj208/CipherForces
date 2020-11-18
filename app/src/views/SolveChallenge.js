@@ -82,8 +82,24 @@ class SolveChallenge extends React.Component {
   }
   handleSolve(event) {
     event.preventDefault();
+    var url = new URL('http://localhost:5000/update_attempts')
+    var id_val = this.props.match.params.id
+    url.searchParams.append('id', id_val)
+    fetch(url)
+    .then(res => res.json())
+    .then(result => {
+        console.log(result);
+    });
     if(this.state.data.providedSolution == this.state.data.solution)
     {
+      var url = new URL('http://localhost:5000/update_success')
+      var id_val = this.props.match.params.id
+      url.searchParams.append('id', id_val)
+      fetch(url)
+      .then(res => res.json())
+      .then(result => {
+          console.log(result);
+      });
       this.setState({
         status : "SUCCESS"
       });

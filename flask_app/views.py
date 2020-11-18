@@ -11,7 +11,6 @@ main = Blueprint('main', __name__)
 
 @main.route('/add_algorithm', methods=['POST'])
 def add_algorithm():
-    print("shit", request.form)
 
     algo_data = request.form
     
@@ -29,7 +28,6 @@ def add_algorithm():
             allow_encrypt = algo_data['allow_encrypt'],
             allow_decrypt = algo_data['allow_decrypt']
         )
-    print(new_algo)
     db.session.add(new_algo)
     db.session.commit()
 
@@ -63,11 +61,24 @@ def get_algo():
     data = {'id' : data.id, 'name' : data.name, 'type' : data.type, 'description' : data.description, 'challenge' : data.challenge, 'hint' : data.hint, 'solution' : data.solution, 'attempts' : data.attempts, 'success' : data.success, 'level' : data.level, 'allow_encrypt' : data.allow_encrypt, 'allow_decrypt' : data.allow_decrypt}
     return json.dumps(data)
 
+@main.route('/update_attempts')
+def update_attempts():
+	data = Algorithm.query.filter(text('id==' + str(request.args.get('id')))).first()
+	data.attempts += 1
+	db.session.commit()
+	return "done"
+
+@main.route('/update_success')
+def update_success():
+    data = Algorithm.query.filter(text('id==' + str(request.args.get('id')))).first()
+    data.success += 1
+    db.session.commit()
+    return "done"
+
 @main.route('/get_algo_level')
 def get_algo_level():
     data = Algorithm.query.filter(text('level==' + str(request.args.get('level')))).all()
     data = [{'id' : row.id, 'name' : row.name, 'type' : row.type, 'description' : row.description, 'challenge' : row.challenge, 'hint' : row.hint, 'solution' : row.solution, 'attempts' : row.attempts, 'success' : row.success, 'level' : row.level} for row in data]
-    print(data)
     return json.dumps(data)
 
 @main.route('/get_level_count')
