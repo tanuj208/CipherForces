@@ -47,7 +47,9 @@ import Footer from "components/Footer/Footer.js";
 
 class AddScheme extends React.Component {
   state = {
-    data : {level: 1}
+    data : {level: 1,
+      allow_encrypt : "yes",
+      allow_decrypt : "yes"}
   };
   constructor(props) {
     super(props);
@@ -114,6 +116,16 @@ class AddScheme extends React.Component {
     else if(e.target.id === 'levelField') {
       let newState = Object.assign({}, this.state.data);
       newState['level'] = e.target.value;
+      this.setState({data : newState});
+    }
+    else if(e.target.id === 'allowEncryptField') {
+      let newState = Object.assign({}, this.state.data);
+      newState['allow_encrypt'] = e.target.value;
+      this.setState({data : newState});
+    }
+    else if(e.target.id === 'allowDecryptField') {
+      let newState = Object.assign({}, this.state.data);
+      newState['allow_decrypt'] = e.target.value;
       this.setState({data : newState});
     }
     else {
@@ -221,13 +233,37 @@ class AddScheme extends React.Component {
                             id="levelField"
                             required
                           >
-                          <option value = "1">1</option>
-                          <option value = "2">2</option>
-                          <option value = "3">3</option>
-                          <option value = "4">4</option>
+                          <option value = "1">Ancient Cipher</option>
+                          <option value = "2">Public Key</option>
+                          <option value = "3">Hashing</option>
+                          <option value = "4">Miscellaneous</option>
                           </select> 
                         </FormGroup>
 
+                        <FormGroup>
+                          <Label for="allowEncryptField">Allow Access to Encryption server?</Label>
+                          <select onChange={this.onChange}
+                            type="text"
+                            name="level"
+                            id="allowEncryptField"
+                            required
+                          >
+                          <option value = "yes">yes</option>
+                          <option value = "no">no</option>
+                          </select> 
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="allowEncryptField">Allow Access to Decryption server?</Label>
+                          <select onChange={this.onChange}
+                            type="text"
+                            name="level"
+                            id="allowDecryptField"
+                            required
+                          >
+                          <option value = "yes">yes</option>
+                          <option value = "no">no</option>
+                          </select> 
+                        </FormGroup>
                         <FormGroup>
                           <Label for="fileField">
                             <Button

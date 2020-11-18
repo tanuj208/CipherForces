@@ -3,6 +3,7 @@ from . import db
 from .models import Algorithm
 from werkzeug.utils import secure_filename
 import json
+import os
 import subprocess
 from sqlalchemy.sql import text
 
@@ -24,7 +25,9 @@ def add_algorithm():
             solution = algo_data['solution'],
             level = algo_data['level'],
             attempts = 0,
-            success = 0
+            success = 0,
+            allow_encrypt = algo_data['allow_encrypt'],
+            allow_decrypt = algo_data['allow_decrypt']
         )
     print(new_algo)
     db.session.add(new_algo)
@@ -33,7 +36,18 @@ def add_algorithm():
     selectedFile = request.files['selectedFile']
     filename = str(new_algo.id) + ".zip"
     selectedFile.save(filename)
+    subprocess.run(["mkdir", str(new_algo.id)])
+    subprocess.run(["mv", filename, str(new_algo.id)])
+    os.chdir(str(new_algo.id))
     subprocess.run(["unzip", filename])
+    folder_name = ''
+    for file_name in os.listdir('.'):
+        if not os.path.isfile(file_name):
+            folder_name = file_name
+            subprocess.run(['mv', file_name, '../'])
+    os.chdir('../')
+    subprocess.run(['rm', '-rf', str(new_algo.id)])
+    subprocess.run(['mv', folder_name, str(new_algo.id)])
 
     return 'Algorithm Added Successfully', 201
 
@@ -46,7 +60,7 @@ def algorithms():
 @main.route('/get_algo')
 def get_algo():
     data = Algorithm.query.get(request.args.get('id'))
-    data = {'id' : data.id, 'name' : data.name, 'type' : data.type, 'description' : data.description, 'challenge' : data.challenge, 'hint' : data.hint, 'solution' : data.solution, 'attempts' : data.attempts, 'success' : data.success, 'level' : data.level}
+    data = {'id' : data.id, 'name' : data.name, 'type' : data.type, 'description' : data.description, 'challenge' : data.challenge, 'hint' : data.hint, 'solution' : data.solution, 'attempts' : data.attempts, 'success' : data.success, 'level' : data.level, 'allow_encrypt' : data.allow_encrypt, 'allow_decrypt' : data.allow_decrypt}
     return json.dumps(data)
 
 @main.route('/get_algo_level')
@@ -73,25 +87,27 @@ def encrypt():
     dataa = request.form
     id = dataa['id']
     plaintext = dataa['plaintext']
-    data = Algorithm.query.get(id)
-    encryptFile = data.name + "/encrypt.py"
+    os.chdir(str(id))
+    encryptFile = "encrypt.py"
     res = subprocess.run(["python3", encryptFile, plaintext], stdout = subprocess.PIPE)
     ciphertext = res.stdout.decode('utf-8')[:-1]
     ciphertext = {"ciphertext": ciphertext}
+    os.chdir('..')
     return json.dumps(ciphertext)
 
 @main.route('/decrypt', methods = ['POST'])
 def decrypt():
-    id = request.get_json()['id']
-    ciphertext = request.get_json()['ciphertext']
-    data = Algorithm.query.get(id)
+    dataa = request.form
+    id = dataa['id']
+    ciphertext = dataa['ciphertext']
     # file to run would be data.name / encrypt / plaintext
-    decryptFile = data.name + "/decrypt.py"
+    os.chdir(str(id))
+    decryptFile = "decrypt.py"
 
     res = subprocess.run(["python3", decryptFile, ciphertext], stdout = subprocess.PIPE)
 
     plaintext = res.stdout.decode('utf-8')[:-1]
 
-    plaintext = {"ciphertext": plaintext}
-    print(plaintext + "boom")
+    plaintext = {"plaintext": plaintext}
+    os.chdir('..')
     return json.dumps(plaintext)

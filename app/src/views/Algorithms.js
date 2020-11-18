@@ -169,7 +169,7 @@ class Algorithms extends React.Component {
                           </thead>
                           <tbody>
                             <tr>
-                              <td className="text-center">1</td>
+                              <td className="text-center">Ancient Cipher</td>
                               <td className="text-center">{this.state.c1}</td>
                               <td className="text-center">
                                   <Button className="btn-icon btn-simple" color="info" size="sm" tag={Link} to={`/algo/${1}`}>
@@ -178,7 +178,7 @@ class Algorithms extends React.Component {
                                </td>
                             </tr>
                             <tr>
-                              <td className="text-center">2</td>
+                              <td className="text-center">Public Key</td>
                               <td className="text-center">{this.state.c2}</td>
                               <td className="text-center">
                                   <Button className="btn-icon btn-simple" color="info" size="sm" tag={Link} to={`/algo/${2}`}>
@@ -187,7 +187,7 @@ class Algorithms extends React.Component {
                                </td>
                             </tr>
                             <tr>
-                              <td className="text-center">3</td>
+                              <td className="text-center">Hashing</td>
                               <td className="text-center">{this.state.c3}</td>
                               <td className="text-center">
                                   <Button className="btn-icon btn-simple" color="info" size="sm" tag={Link} to={`/algo/${3}`}>
@@ -196,7 +196,7 @@ class Algorithms extends React.Component {
                                </td>
                             </tr>
                             <tr>
-                              <td className="text-center">4</td>
+                              <td className="text-center">Miscellaneous</td>
                               <td className="text-center">{this.state.c4}</td>
                               <td className="text-center">
                                   <Button className="btn-icon btn-simple" color="info" size="sm" tag={Link} to={`/algo/${4}`}>

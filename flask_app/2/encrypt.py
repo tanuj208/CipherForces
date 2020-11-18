@@ -2,15 +2,14 @@ import ast
 import json
 import random
 import shlex
-import sys
 
 import helper
 
 def take_input():
 	"""Takes all necessary inputs for encryption."""
 
-	# print("Enter the message to be encrypted and then press enter: ")
-	plaintext = sys.argv[1]
+	print("Enter the message to be encrypted and then press enter: ")
+	plaintext = input()
 	try:
 		plaintext = ast.literal_eval(shlex.quote(plaintext))
 	except:
@@ -20,7 +19,7 @@ def take_input():
 def get_keys():
 	"""Extracts key from json file."""
 
-	with open('diffie_hellman/keys.json') as f:
+	with open('keys.json') as f:
 		keys = json.load(f)
 	return keys
 
