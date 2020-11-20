@@ -15,3 +15,5 @@ To run react app ->
 
 Format requirements in challenge codes ->
 - Input in any code through command line arguments
+
+## Use Google chrome 
