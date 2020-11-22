@@ -23,6 +23,17 @@ schemes. A Prehosted set of Challenges spanning from Ancient Ciphers to Advanced
     - Solve Challenges
     - Keep track of attempts and successes
 
+# Challenge Upload
+For challenge upload, the security scheme should adhere to a specific format for proper execution.
+The uploaded file should be in a zip file containing a folder having the following contents:
+ - encrypt.py
+ - decrypt.py
+ - generate_keys.py
+ - keys.json
+ 
+The above programs should have the same functionality as their names.
+All the files should take a command line argument and output the respective content in the console itself without any other redundant data.
+
 # How to Run
 
 To run, clone the directory, then type the following commands, inside the cloned directory.
@@ -41,6 +52,12 @@ For react app -
 $ cd app
 $ npm start
 ```
+
+To create a fresh database, delete the previous database and create a fresh database using the command:
+```sh
+$ python3 create_db.py
+```
+
 License
 -------
 Copyright &copy; 2019 Mayank Musaddi <mayank.musaddi@research.iiit.ac.in>
