@@ -43,6 +43,7 @@ For flask app -
 ```sh
 $ cd flask_app
 $ export FLASK_APP=__init__.py
+$ pip3 -r requirements.txt
 $ flask run
 ```
 
