@@ -60,4 +60,4 @@ $ python3 create_db.py
 
 License
 -------
-Copyright &copy; 2019 Mayank Musaddi <mayank.musaddi@research.iiit.ac.in>
+Copyright &copy; 2020 Cipher Forces <tanuj.garg@students.iiit.ac.in>
