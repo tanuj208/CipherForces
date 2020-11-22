@@ -50,6 +50,7 @@ For react app -
 
 ```sh
 $ cd app
+$ npm install
 $ npm start
 ```
 
